@@ -1,8 +1,24 @@
 <div class="bounds">
-  <header>
-    <h1>{{ title }}</h1>
-    <app-dish-search class="search"></app-dish-search>
-  </header>
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-5">
+    <logo><a class="navbar-brand" href="#">{{title}}</a></logo>
+    <links>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown" *ngFor="let typeOfDishes of typeOfDishes">
+          <a dropdownToggle mdbRippleRadius type="button"
+             class="nav-link dropdown-toggle waves-light">{{typeOfDishes.name}}<span class="caret"></span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy0</a>
+            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy1</a>
+            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy2</a>
+            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy3</a>
+          </div>
+        </li>
+      </ul>
+    </links>
+    <form class="form-inline waves-light" mdbRippleRadius>
+      <app-dish-search class="form-control mr-sm-2"></app-dish-search>
+    </form>
+  </mdb-navbar>
   <div class="content"
        fxLayout="row"
        fxFlexFill>

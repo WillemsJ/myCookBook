@@ -9,31 +9,24 @@ h2 {
   margin-top: 0;
   padding-top: 0;
 }
-nav a {
-  padding: 5px 10px;
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #eee;
-  border-radius: 4px;
-}
-nav a:visited, a:link {
-  color: #607D8B;
-}
-nav a:hover {
-  color: #039be5;
-  background-color: #CFD8DC;
-}
-nav a.active {
-  color: #039be5;
-}
-
-img {
-  margin-top: 1em;
-  width: 70%;
-  opacity: .5;
-}
-
+//nav a {
+//  padding: 5px 10px;
+//  text-decoration: none;
+//  margin-top: 10px;
+//  display: inline-block;
+//  background-color: #eee;
+//  border-radius: 4px;
+//}
+//nav a:visited, a:link {
+//  color: #607D8B;
+//}
+//nav a:hover {
+//  color: #039be5;
+//  background-color: #CFD8DC;
+//}
+//nav a.active {
+//  color: #039be5;
+//}
 .bounds {
   text-align: center;
   position: relative;
@@ -65,10 +58,4 @@ img {
 .secList, .secIngredients, .secUnits {
   padding: 20px;
   text-align: left;
-}
-.search {
-  right: 10px;
-  top: 10px;
-  position: absolute;
-
 }
