@@ -3,6 +3,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { NavbarComponent } from "angular-bootstrap-md/navbars/navbar.component";
+import { NavbarModule} from "angular-bootstrap-md/navbars/navbar.module";
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
 import { InMemoryDataService }  from './in-memory-data.service';
@@ -36,7 +38,9 @@ import { DishSearchComponent } from './dish-search/dish-search.component';
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
     ),
-    FlexLayoutModule
+    FlexLayoutModule,
+    NavbarComponent,
+    NavbarModule
   ],
   providers: [DishService, MessageService],
   bootstrap: [AppComponent],
