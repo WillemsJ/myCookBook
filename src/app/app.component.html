@@ -1,0 +1,31 @@
+<div class="bounds">
+  <header>
+    <h1>{{ title }}</h1>
+    <app-dish-search class="search"></app-dish-search>
+  </header>
+  <div class="content"
+       fxLayout="row"
+       fxFlexFill>
+    <div fxFlex="30" class="secList">
+      <app-dashboard></app-dashboard>
+      <!--<router-outlet></router-outlet>-->
+    </div>
+    <div fxFlex="45" class="secIngredients">
+      <app-dish-detail></app-dish-detail>
+    </div>
+    <div fxFlex="35" class="secUnits">
+      Section for units
+    </div>
+  </div>
+</div>
+
+<!--<div style="text-align:center">-->
+  <!--<img alt="Angular Logo" src="/assets/Images/dishesbanner.jpg">-->
+  <!--<nav>-->
+    <!--<a routerLink="/dashboard">Dashboard</a>-->
+    <!--<a routerLink="/dishes">Dishes</a>-->
+  <!--</nav>-->
+  <!--<h2>Here are some dishes </h2>-->
+  <!--<app-messages></app-messages>-->
+<!--</div>-->
+

@@ -1,0 +1,31 @@
+<h3>Dishes</h3>
+<nav>
+  <div>
+    <ul>
+      <li *ngFor="let typeOfDish of typesOfDishes"
+          [class.selected]="typeOfDish === selectedDish"
+          (click)="onSelect(typeOfDish)">
+        <div class="module">
+          <a>{{typeOfDish.name}}</a>
+          <div>
+            <ul>
+
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--<ul>-->
+  <!--<li *ngFor="let dish of typesOfDishes">-->
+      <!--&lt;!&ndash;routerLink="/detail/{{dish.id}}">&ndash;&gt;-->
+    <!--<a>-->
+      <!--<div class="module dish">-->
+        <!--<h4>{{dish.name}}</h4>-->
+      <!--</div>-->
+    <!--</a>-->
+  <!--</li>-->
+<!--</ul>-->
+
+<!--<app-dish-search></app-dish-search>-->
