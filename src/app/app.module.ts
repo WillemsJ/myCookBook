@@ -5,16 +5,16 @@ import { HttpClientModule} from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryDataService } from './in-memory-data.service';
+import { InMemoryDataService } from './service/in-memory-data.service';
 
 import { AppRoutingModule } from './/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
-import { DishService } from "./dish.service";
+import { DishService } from "./service/dish.service";
 import { MessagesComponent } from './messages/messages.component';
-import {MessageService} from "./message.service";
+import {MessageService} from "./service/message.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DishSearchComponent } from './dish-search/dish-search.component';
 
@@ -23,6 +23,7 @@ import { environment } from "../environments/environment";
 import { AngularFireModule} from "angularfire2";
 import { AngularFireDatabaseModule} from "angularfire2/database";
 import { AngularFireAuthModule} from "angularfire2/auth";
+import { AuthService } from './service/authentication/auth.service';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { AngularFireAuthModule} from "angularfire2/auth";
     ),
     FlexLayoutModule
   ],
-  providers: [DishService, MessageService],
+  providers: [DishService, MessageService, AuthService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 

@@ -3,7 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 
 import { Dish } from "../dish";
-import { DishService } from "../dish.service";
+import { DishService } from "../service/dish.service";
 
 @Component({
   selector: 'app-dish-detail',

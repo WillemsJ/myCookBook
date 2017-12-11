@@ -7,7 +7,7 @@ import { of } from "rxjs/observable/of";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
 import { Dish } from "../dish";
-import { DishService } from "../dish.service";
+import { DishService } from "../service/dish.service";
 
 @Component({
   selector: 'app-dish-search',
