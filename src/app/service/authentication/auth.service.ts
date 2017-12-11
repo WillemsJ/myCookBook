@@ -9,18 +9,18 @@ export class AuthService implements OnInit {
 
   user: Observable<firebase.User>;
 
-  constructor(public afAuth: AngularFireAuth, private _firebaseAuth: AngularFireAuth) {
+
+  constructor(public afAuth: AngularFireAuth) {
     this.user = this.afAuth.authState;
   }
 
   ngOnInit() {
   }
 
-
-  loginGoogle() {
-    this.afAuth.auth.signInWithEmailAndPassword('jwillems04@gmail.com', 'seth1704Apr9l');
-    const emailValue = document.getElementById('emailID');
-    console.log(emailValue);
+  loginEmail() {
+    return this.afAuth.auth.signInWithEmailAndPassword('jwillems04@gmail.com', 'seth1704Apr9l');
+    // const emailValue = document.getElementById('emailID');
+    // console.log(emailValue);
   }
   loginAnonymous() {
     this.afAuth.auth.signInAnonymously();

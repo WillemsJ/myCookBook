@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { AuthService} from '../service/authentication/auth.service';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase';
+import { isNullOrUndefined } from 'util';
+
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +11,19 @@ import { AuthService} from '../service/authentication/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  auth: AuthService;
 
-  constructor() { }
+  user: Observable<firebase.User>;
+
+  constructor(private authService: AuthService) {
+  }
+
+  authServiceLoginEmail() {
+    this.authService.loginEmail().then((loggedInUserData) => {
+      console.log(loggedInUserData.email);
+    });
+  }
+
+  authserviceLogout() {
+    this.authService.logout();
+  }
 }

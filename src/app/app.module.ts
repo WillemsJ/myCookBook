@@ -51,7 +51,7 @@ import { NavbarComponent } from './navbar/navbar.component';
     FlexLayoutModule
   ],
   providers: [DishService, MessageService, AuthService],
-  bootstrap: [AppComponent, NavbarComponent],
+  bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 
 })
