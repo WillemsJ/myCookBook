@@ -24,6 +24,7 @@ import { AngularFireModule} from "angularfire2";
 import { AngularFireDatabaseModule} from "angularfire2/database";
 import { AngularFireAuthModule} from "angularfire2/auth";
 import { AuthService } from './service/authentication/auth.service';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AuthService } from './service/authentication/auth.service';
     DishDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    DishSearchComponent
+    DishSearchComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,7 @@ import { AuthService } from './service/authentication/auth.service';
     FlexLayoutModule
   ],
   providers: [DishService, MessageService, AuthService],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent, NavbarComponent],
   schemas: [NO_ERRORS_SCHEMA]
 
 })

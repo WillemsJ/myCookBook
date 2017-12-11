@@ -5,7 +5,7 @@ import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnInit {
 
   user: Observable<firebase.User>;
 
