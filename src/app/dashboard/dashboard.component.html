@@ -1,22 +1,39 @@
 <h3>Dishes</h3>
-<nav>
-  <div>
-    <ul>
-      <li *ngFor="let typeOfDish of typesOfDishes"
-          [class.selected]="typeOfDish === selectedDish"
-          (click)="onSelect(typeOfDish)">
-        <div class="module">
-          <a>{{typeOfDish.name}}</a>
-          <div>
-            <ul>
+<!--<nav>-->
+  <!--<div>-->
+    <!--<ul>-->
+      <!--<li *ngFor="let typeOfDish of typesOfDishes"-->
+          <!--[class.selected]="typeOfDish === selectedDish"-->
+          <!--(click)="onSelect(typeOfDish)">-->
+        <!--<div class="module">-->
+          <!--<a>{{typeOfDish.name}}</a>-->
+          <!--<div>-->
+            <!--<ul>-->
 
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ul>
+            <!--</ul>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</nav>-->
+
+<mdb-navbar>
+  
+</mdb-navbar>
+
+<div class="btn-group-vertical" dropdown>
+  <button dropdownToggle type="button"
+          class="btn btn-default dropdown-toggle waves-light" mdbRippleRadius
+          *ngFor="let typeOfDish of typesOfDishes"
+          [class.selected]="typeOfDish === selectedDish">
+          <!--(click)="onselect(typeOfDish)">-->
+    {{typeOfDish.name}}
+  </button>
+  <div class="dropdown-menu dropdown-default">
+    <a class="dropdown-item" href="#">dummy</a>
   </div>
-</nav>
+</div>
 <!--<ul>-->
   <!--<li *ngFor="let dish of typesOfDishes">-->
       <!--&lt;!&ndash;routerLink="/detail/{{dish.id}}">&ndash;&gt;-->
