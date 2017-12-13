@@ -1,14 +1,9 @@
-<div *ngIf="dish" (click)="setDish(dish)">
+<div *ngIf="(user | async)?.uid">
+  <div *ngIf="dish" (click)="setDish(dish)">
   <h2>{{ dish.name | uppercase }} Details</h2>
   <div><span>id: </span>{{dish.id}}</div>
   <div><span>name: </span>{{dish.name}}</div>
   <div><span>requirements: </span>dummy</div>
   <div><span>prepared manner: </span>dummy</div>
-    <!--<label>name:-->
-      <!--<input [(ngModel)]="dish.name" placeholder="name">-->
-    <!--</label>-->
-  <!--</div>-->
-  <!--<button (click)="goBack()">go back</button>-->
-  <!--<button (click)="save()">save</button>-->
 </div>
-
+</div>

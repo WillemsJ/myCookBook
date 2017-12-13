@@ -1,9 +1,10 @@
-<h3>Dishes</h3>
-<div>
+<div *ngIf="(user | async)?.uid">
+  <h3>Dishes</h3>
   <ul>
     <li *ngFor="let typeOfDish of typesOfDishes"
         [class.selected]="typeOfDish === selectedDish"
-        (click)="onSelect(typeOfDish)">
+        (click)="onSelect(typeOfDish)"
+        routerLink="/detail/{{typeOfDish.id}}">
       <div class="module">
         <a>{{typeOfDish.name}}</a>
         <div>
@@ -18,7 +19,7 @@
 
 <!--<ul>-->
   <!--<li *ngFor="let dish of typesOfDishes">-->
-      <!--&lt;!&ndash;routerLink="/detail/{{dish.id}}">&ndash;&gt;-->
+      <!--routerLink="/detail/{{dish.id}}">-->
     <!--<a>-->
       <!--<div class="module dish">-->
         <!--<h4>{{dish.name}}</h4>-->

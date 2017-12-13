@@ -1,30 +1,10 @@
 <div class="bounds">
-  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-5">
-    <logo><a class="navbar-brand" href="#">{{title}}</a></logo>
-    <links>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown" *ngFor="let typeOfDishes of typeOfDishes">
-          <a dropdownToggle mdbRippleRadius type="button"
-             class="nav-link dropdown-toggle waves-light">{{typeOfDishes.name}}<span class="caret"></span></a>
-          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy0</a>
-            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy1</a>
-            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy2</a>
-            <a class="dropdown-item waves-light" mdbRippleRadius href="#">dummy3</a>
-          </div>
-        </li>
-      </ul>
-    </links>
-    <form class="form-inline waves-light" mdbRippleRadius>
-      <app-dish-search class="form-control mr-sm-2"></app-dish-search>
-    </form>
-  </mdb-navbar>
+<app-dish-nav></app-dish-nav>
   <div class="content"
        fxLayout="row"
        fxFlexFill>
     <div fxFlex="30" class="secList">
       <app-dashboard></app-dashboard>
-      <!--<router-outlet></router-outlet>-->
     </div>
     <div fxFlex="45" class="secIngredients">
       <app-dish-detail></app-dish-detail>
@@ -34,14 +14,3 @@
     </div>
   </div>
 </div>
-
-<!--<div style="text-align:center">-->
-  <!--<img alt="Angular Logo" src="/assets/Images/dishesbanner.jpg">-->
-  <!--<nav>-->
-    <!--<a routerLink="/dashboard">Dashboard</a>-->
-    <!--<a routerLink="/dishes">Dishes</a>-->
-  <!--</nav>-->
-  <!--<h2>Here are some dishes </h2>-->
-  <!--<app-messages></app-messages>-->
-<!--</div>-->
-

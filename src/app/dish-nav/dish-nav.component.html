@@ -1,0 +1,43 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light blue-grey lighten-1 sticky-top">
+  <logo><a class="navbar-brand" href="#">{{title}}</a></logo>
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" style="margin-right: 1em">
+        <form *ngIf="!(user | async)?.uid" id="form1">
+          <input type="email" id="emailID" placeholder="email adres"><br>
+          <input id="password" type="password" placeholder="password">
+          <br>
+        </form>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbRippleRadius>Login</a>
+      </li>
+      <li class="nav-item" *ngIf="(user | async)?.uid">
+        <a class="nav-link waves-light" mdbRippleRadius>Logout</a>
+      </li>
+      <li class="nav-item dropdown" dropdown *ngIf="(user | async)?.uid">
+        <a dropdownToggle mdbRippleRadius
+           type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
+          dropdown <span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a *ngFor="let typeOfDish of typesOfDishes" class="dropdown-item waves-light" mdbRippleRadius href="#">{{typeOfDish.name}}</a>
+          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="chooseDish()">Dishes</a>
+          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="chooseDrinks()">Drinks</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" #searchBox (keyup)="search(searchBox.value)">
+      <ul>
+        <li *ngFor="let typeOfDish of typeOfDishes$ | async">
+          <a routerLink="/detail/{{typeOfDish.id}}">
+            {{typeOfDish.name}}
+          </a>
+        </li>
+      </ul>
+    </form>
+  </links>
+</mdb-navbar>

@@ -1,22 +1,13 @@
 <h2>My Dishes</h2>
 
-<div>
-  <label>Dish name:
-    <input #dishName>
-  </label>
-  <!-- (click) passes input value to add() and then clears the input -->
-  <button (click)="add(dishName.value); dishName.value=''">
-    add
-  </button>
-</div>
-
 <ul class="dishes">
-  <li *ngFor="let dish of dishes">
-    <a routerLink="/detail/{{dish.id}}">
-      <span class="badge">{{dish.id}}</span> {{dish.name}}
-    </a>
-    <button class="delete" title="delete dish"
-            (click)="delete(dish)">delete dish</button>
+  <li *ngFor="let typeOfDish of typesOfDishes"
+      [class.selected]="typeOfDish === selectedDish"
+      (click)="onSelect(typeOfDish)">
+    <span class="badge">{{typeOfDish.id}}</span> {{typeOfDish.name}}
   </li>
 </ul>
+
+
+
 

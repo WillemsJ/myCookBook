@@ -16,6 +16,7 @@ import { DishService } from "../dish.service";
 })
 export class DishSearchComponent implements OnInit {
   dishes$: Observable<Dish[]>;
+  typeOfDishes$: Observable<Dish[]>;
   private searchTerms = new Subject<String>();
 
   constructor(private dishService: DishService) { }
@@ -29,13 +30,16 @@ export class DishSearchComponent implements OnInit {
     this.dishes$ = this.searchTerms.pipe(
       // wait 300ms after keystroke before considering the term
       debounceTime(300),
-
       // ignore the new term is the same as previous term
       distinctUntilChanged(),
-
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.dishService.searchDishes(term)),
 
+    );
+    this.typeOfDishes$ = this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((term: string) => this.dishService.searchDishes(term)),
     );
   }
 

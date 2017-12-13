@@ -18,6 +18,7 @@ import { MessagesComponent } from './messages/messages.component';
 import {MessageService} from "./message.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DishSearchComponent } from './dish-search/dish-search.component';
+import { DishNavComponent } from './dish-nav/dish-nav.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DishSearchComponent } from './dish-search/dish-search.component';
     DishDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    DishSearchComponent
+    DishSearchComponent,
+    DishNavComponent
   ],
   imports: [
     BrowserModule,

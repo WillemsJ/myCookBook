@@ -1,9 +1,9 @@
 <div id="search-component">
-  <input #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
-  <ul class="search-result">
-    <li *ngFor="let dish of dishes$ | async">
-      <a routerLink="/detail/{{dish.id}}">
-        {{dish.name}}
+  <input id="searchBox" class="form-control" #searchBox (keyup)="search(searchBox.value)"/>
+  <ul>
+    <li *ngFor="let typeOfDish of typeOfDishes$ | async">
+      <a routerLink="/detail/{{typeOfDish.id}}">
+        {{typeOfDish.name}}
       </a>
     </li>
   </ul>
