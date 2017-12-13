@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     this.getSoups();
     this.getMainDishes();
     this.getDesserts();
-    this.getAperitifs()
+    this.getAperitifs();
   }
 
   getDishes(): void {

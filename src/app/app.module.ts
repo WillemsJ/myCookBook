@@ -23,8 +23,8 @@ import { environment } from "../environments/environment";
 import { AngularFireModule} from "angularfire2";
 import { AngularFireDatabaseModule} from "angularfire2/database";
 import { AngularFireAuthModule} from "angularfire2/auth";
-import { AuthService } from './service/authentication/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MDBBootstrapModule } from 'angular-bootstrap-md/index';
 
 
 @NgModule({
@@ -45,12 +45,13 @@ import { NavbarComponent } from './navbar/navbar.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
+    MDBBootstrapModule.forRoot(),
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, {dataEncapsulation: false}
     ),
     FlexLayoutModule
   ],
-  providers: [DishService, MessageService, AuthService],
+  providers: [DishService, MessageService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 
