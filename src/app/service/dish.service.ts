@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 import { of } from "rxjs/observable/of";
 import {catchError, map, tap} from "rxjs/operators";
 
-import { Dish } from "./dish";
+import { Dish } from "../dish";
 import { MessageService } from "./message.service";
 
 const httpOptions = {

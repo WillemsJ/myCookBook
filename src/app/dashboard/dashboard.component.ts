@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Dish} from "../dish";
-import {DishService} from "../dish.service";
+import {DishService} from "../service/dish.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     this.getSoups();
     this.getMainDishes();
     this.getDesserts();
-    this.getAperitifs()
+    this.getAperitifs();
   }
 
   getDishes(): void {

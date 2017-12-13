@@ -1,25 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import * as firebase from 'firebase';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
-import {Dish} from "../dish";
-import {DishService} from "../service/dish.service";
-import {Observable} from "rxjs/Observable";
-import {FormControl, FormGroup} from "@angular/forms";
-import * as firebase from "firebase";
-import {AngularFireAuth} from "angularfire2/auth";
-import {AngularFireDatabase} from "angularfire2/database";
-import {AppComponent} from "../app.component";
 
 
 @Component({
-  selector: 'app-dish-nav',
-  templateUrl: './dish-nav.component.html',
-  styleUrls: ['./dish-nav.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class DishNavComponent implements OnInit {
+export class NavbarComponent implements OnInit {
 
-  appComp = AppComponent.getInstance();
-
-  dishes: Dish[] = [];
   dishesObservable: Observable<any[]>;
   userPromise: Promise<firebase.User>;
   user: Observable<firebase.User>;
@@ -30,10 +24,10 @@ export class DishNavComponent implements OnInit {
     password: new FormControl()
   });
 
-
-  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) { }
+  constructor(private db: AngularFireDatabase, public afAuth: AngularFireAuth) {}
 
   ngOnInit() {
+
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {
         this.user = this.afAuth.authState;
@@ -54,7 +48,6 @@ export class DishNavComponent implements OnInit {
   loginAnonymous() {
     this.userPromise = this.afAuth.auth.signInAnonymously();
   }
-
   logout() {
     this.db.database.goOffline();
     this.userPromise = this.afAuth.auth.signOut();
@@ -91,5 +84,4 @@ export class DishNavComponent implements OnInit {
       this.dishesKeys = units;
     });
   }
-
 }

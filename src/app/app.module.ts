@@ -6,20 +6,26 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { MDBBootstrapModule } from "angular-bootstrap-md/index";
 
 import { HttpClientInMemoryWebApiModule } from "angular-in-memory-web-api";
-import { InMemoryDataService }  from './in-memory-data.service';
+import { InMemoryDataService } from './service/in-memory-data.service';
 
 import { AppRoutingModule } from './/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DishesComponent } from './dishes/dishes.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
-import  { DishService } from "./dish.service";
+import { DishService } from "./service/dish.service";
 import { MessagesComponent } from './messages/messages.component';
-import {MessageService} from "./message.service";
+import {MessageService} from "./service/message.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DishSearchComponent } from './dish-search/dish-search.component';
 import { DishNavComponent } from './dish-nav/dish-nav.component';
 import { UnitcalcComponent } from './unitcalc/unitcalc.component';
+
+
+import { environment } from "../environments/environment";
+import { AngularFireModule} from 'angularfire2';
+import { AngularFireDatabaseModule} from 'angularfire2/database';
+import { AngularFireAuthModule} from 'angularfire2/auth';
 
 
 @NgModule({
@@ -35,6 +41,9 @@ import { UnitcalcComponent } from './unitcalc/unitcalc.component';
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
