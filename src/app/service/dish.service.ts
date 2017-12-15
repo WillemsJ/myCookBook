@@ -17,12 +17,6 @@ const httpOptions = {
 export class DishService {
 
   private dishesUrl = 'api/dishes'; // URL to web api
-  private dishTypeUrl = 'api/typesOfDishes';
-  private appetizerUrl = 'api/appetizer';
-  private soupUrl = 'api/soup';
-  private mainDishUrl = 'api/mainDish';
-  private dessertUrl = 'api/dessert';
-  private aperitifUrl = 'api/aperitif';
   private dishesKeys: string[];
 
   constructor(
@@ -74,61 +68,6 @@ export class DishService {
     });
   }
 
-  getTypesOfDishes(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.dishTypeUrl).pipe(
-      tap(typeOfDishes => this.log(`fetched types of dishes`)),
-      catchError(this.handleError('getTypesOfDishes', []))
-    );
-  }
-
-  getAppetizer(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.appetizerUrl).pipe(
-      tap(appetizer => this.log(`fetched appetizers`)),
-      catchError(this.handleError('getAppetizer', []))
-    );
-  }
-
-  getSoup(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.soupUrl).pipe(
-      tap(soup => this.log(`fetched soups`)),
-      catchError(this.handleError('getSoup', []))
-    );
-  }
-
-  getMainDish(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.mainDishUrl).pipe(
-      tap(mainDish => this.log(`fetched main dishes`)),
-      catchError(this.handleError('getMainDish', []))
-    );
-  }
-
-  getDessert(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.dessertUrl).pipe(
-      tap(dessert => this.log(`fetched dessert`)),
-      catchError(this.handleError('getDessert', []))
-    );
-  }
-
-  getAperitif(): Observable<Dish[]> {
-    return this.http.get<Dish[]>(this.aperitifUrl).pipe(
-      tap(aperitif => this.log(`fetched aperitif`)),
-      catchError(this.handleError('getAperitif', []))
-    );
-  }
-
-  getDishNo404<Data>(id: number): Observable<Dish> {
-    const url = `${this.dishesUrl}/?id=${id}`;
-    return this.http.get<Dish>(url)
-      .pipe(
-        map(dishes => dishes[0]), // returns a {0|1} element array
-        tap(d => {
-          const outcome = d ? `fetched` : `did not find`;
-          this.log(`${outcome} dish id = ${id}`);
-        }),
-        catchError(this.handleError<Dish>(`getDish id = ${id}`))
-    );
-  }
-
   getDish(id: number): Observable<Dish> {
     // this.messageService.add(`DishService: fetched dish id=${id}`);
     const url = `${this.dishesUrl}/?id=${id}`;
@@ -146,30 +85,6 @@ export class DishService {
     return this.http.get<Dish[]>(`api/dishes/?name=${term}`).pipe(
       tap(_ => this.log(`found dishes matching ${term}`)),
       catchError(this.handleError<Dish[]>('deleteDish', []))
-    );
-  }
-
-  addDish(dish: Dish): Observable<Dish> {
-    return this.http.post<Dish>(this.dishesUrl, dish, httpOptions).pipe(
-      tap((dish: Dish) => this.log(`added dish w/ id=${dish.id}`)),
-      catchError(this.handleError<Dish>('addDish'))
-    )
-  }
-
-  deleteDish(dish: Dish | number): Observable<Dish> {
-    const id = typeof dish === 'number' ? dish : dish.id;
-    const url = `${this.dishesUrl}/${id}`;
-
-    return this.http.delete<Dish>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted dish id = ${id}`)),
-      catchError(this.handleError<Dish>('deleteDish'))
-    )
-  }
-
-  updateDish(dish: Dish): Observable<any> {
-    return this.http.put(this.dishesUrl, dish, httpOptions).pipe(
-      tap(_ => this.log(`updated dish id=${dish.id}`)),
-      catchError(this.handleError<any>('updateDish'))
     );
   }
 
