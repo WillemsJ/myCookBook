@@ -29,11 +29,11 @@
       </li>
 
       <!-- selfmade dropdown experiment-->
-      <select (change)="selectCategoryHandler($event)">
+      <select *ngIf="(user | async)?.uid" (change)="selectCategoryHandler($event)">
         <option value="Dishes">Dishes</option>
         <option value="Drinks">Drinks</option>
       </select>
-      <p><span>You selected:</span><b>{{selectedCategory}}</b></p>
+      <p *ngIf="(user | async)?.uid"><span>You selected:</span><b>{{selectedCategory}}</b></p>
     </ul>
     <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">
       <app-dish-search></app-dish-search>
