@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {DishService} from "../service/dish.service";
 import {DishNavComponent} from "../dish-nav/dish-nav.component";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {AngularFireDatabase} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
+import { CategoryService} from '../service/chosencategory.service';
+import { Subscription } from 'rxjs/Subscription';
+import { EventBusService } from '../service/event-bus.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,19 +17,29 @@ export class DashboardComponent implements OnInit {
   dishesObservable: Observable<any[]>;
   user: Observable<firebase.User>;
   userPromise: Promise<firebase.User>;
-  // dishesKeys: string[];
-  dishesKeys: string[] = this.dishService.getDishesKeys();
-
+  foodKeys: string[];
+  food: string[];
   dishNavComp = DishNavComponent.getDishNavMethods();
-  @Input() public getCategory: string;
 
-  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+  category: any;
+  subscription: Subscription;
+
+
+
+  constructor(private categoryService: CategoryService, private db: AngularFireDatabase,
+              public afAuth: AngularFireAuth, private event: EventBusService) {
+    this.subscription = this.categoryService.getCategory().subscribe(category => {
+      this.category = category;
+      console.log(category);
+    });
   }
 
   ngOnInit() {
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {
         this.user = this.afAuth.authState;
+
+        this.processData();
       }
       if (!(auth && auth.uid)) {
         this.dishesObservable = null;
@@ -38,36 +50,16 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  getDishes(listPath): Observable<any> {
-      return this.db.object(listPath).valueChanges();
-  }
-
-  getDrinks(listPath): Observable<any> {
-      return this.db.object(listPath).valueChanges();
-  }
-
-  getUnits(listPath): Observable<any[]> {
-    return this.db.list(listPath).valueChanges();
-  }
-
-  chooseDish() {
-    this.getDishes('/Dishes').subscribe((dishes) => {
-      console.log(dishes);
-      this.dishesKeys = Object.keys(dishes);
+  private processData(): void {
+    this.event.observe('changedCategory').subscribe((value) => {
+      console.log(value.listPath);
+      this.db.object(value.listPath).valueChanges().subscribe(values => {
+        console.log(values);
+        this.food = Object.keys(values);
+        console.log(Object.keys(values));
+      });
     });
   }
 
-  chooseDrinks() {
-    this.getDrinks('/Drinks').subscribe(drinks => {
-      console.log(drinks);
-      this.dishesKeys = Object.keys(drinks);
-    });
-  }
 
-  chooseUnits() {
-    this.getUnits('/Units').subscribe(units => {
-      console.log(units);
-      this.dishesKeys = units;
-    });
-  }
 }

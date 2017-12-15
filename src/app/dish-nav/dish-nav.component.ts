@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-
-import {Dish} from "../dish";
-import {DishService} from "../service/dish.service";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {Observable} from "rxjs/Observable";
-import {FormControl, FormGroup} from "@angular/forms";
 import * as firebase from "firebase";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import {AppComponent} from "../app.component";
 import {Subject} from "rxjs/Subject";
+import { CategoryService } from '../service/chosencategory.service';
+import { DashboardComponent} from '../dashboard/dashboard.component';
+import { EventBusService } from '../service/event-bus.service';
 
 
 @Component({
@@ -25,13 +24,13 @@ export class DishNavComponent implements OnInit {
   dishesObservable: Observable<any[]>;
   userPromise: Promise<firebase.User>;
   user: Observable<firebase.User>;
+  method: DashboardComponent;
 
   private searchTerms = new Subject<string>();
   email = 'email';
   password = 'password';
-
-
-  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+  constructor(private categoryService: CategoryService, private db: AngularFireDatabase,
+              public afAuth: AngularFireAuth, private event: EventBusService) {
   }
 
   static getDishNavMethods(): DishNavComponent {
@@ -55,7 +54,6 @@ export class DishNavComponent implements OnInit {
   changeEmail(ev) {
     this.email = ev.target.value;
   }
-
   currentPassword(ev) {
     this.password = ev.target.value;
   }
@@ -64,11 +62,9 @@ export class DishNavComponent implements OnInit {
     this.userPromise = this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
     console.log(this.userPromise);
   }
-
   loginAnonymous() {
     this.userPromise = this.afAuth.auth.signInAnonymously();
   }
-
   logout() {
     this.db.database.goOffline();
     this.userPromise = this.afAuth.auth.signOut();
@@ -77,5 +73,10 @@ export class DishNavComponent implements OnInit {
   selectCategoryHandler(ev: any) {
     this.selectedCategory = ev.target.value;
   }
-
+  sendDishesCategory(category: string) {
+    this.event.emit('changedCategory', { listPath: '/Dishes' });
+  }
+  sendDrinksCategory(category: string) {
+    this.event.emit('changedCategory', { listPath: '/Drinks' });
+  }
 }

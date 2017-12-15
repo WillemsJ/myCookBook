@@ -1,54 +1,17 @@
 <div *ngIf="(user | async)?.uid">
-  <p>{{getCategory}}</p>
-</div>
-  <!--<div *ngIf="">-->
-    <!--<h3>Dishes</h3>-->
-  <!--</div>-->
-  <!--<div *ngIf="">-->
-    <!--<h3>Drinks</h3>-->
-  <!--</div>-->
-  <!--<div *ngFor=" let dish of dishesKeys">-->
-    <!--<div class="btn-group" dropdown>-->
-      <!--<button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius-->
-              <!--(click)="getDishes()">{{dish}}-->
-      <!--</button>-->
-      <!--<div class="dropdown-menu dropdown-primary">-->
-        <!--<div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">-->
-          <!--<ngb-alert type="info" [dismissible]="false">-->
-            <!--<button >{{dish}}</button>-->
-          <!--</ngb-alert>-->
-        <!--</div>-->
+    <p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>
+      <div *ngFor=" let dish of food">
+        <ngb-alert type="info" [dismissible]="false">
+          <button>{{dish}}</button>
+        </ngb-alert>
+      </div>
+    <!--<div  >-->
+      <!--<div *ngFor=" let drink of drinkskeys" >-->
+        <!--<ngb-alert type="info" [dismissible]="false">-->
+          <!--<button>{{drink}}</button>-->
+        <!--</ngb-alert>-->
       <!--</div>-->
     <!--</div>-->
-  <!--</div>-->
-    <!--<ul>-->
-      <!--<li>-->
-        <!--<div class="btn-group" dropdown>-->
-          <!--<button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius-->
-                  <!--(click)="getDishes()" *ngIf="(user | async)?.uid">Dishes-->
-          <!--</button>-->
-          <!--<div class="dropdown-menu dropdown-primary">-->
-            <!--<div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">-->
-              <!--<ngb-alert type="info" [dismissible]="false">-->
-                <!--<button >{{dish}}</button>-->
-              <!--</ngb-alert>-->
-            <!--</div>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</li>-->
-      <!--<li>-->
-      <!--<div class="btn-group" dropdown>-->
-        <!--<button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius-->
-                <!--(click)="getDrinks()" *ngIf="(user | async)?.uid">Drinks-->
-        <!--</button>-->
-        <!--<div class="dropdown-menu dropdown-primary">-->
-          <!--<div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">-->
-            <!--<ngb-alert type="info" [dismissible]="false">-->
-              <!--<button >{{dish}}</button>-->
-            <!--</ngb-alert>-->
-          <!--</div>-->
-        <!--</div>-->
-      <!--</div>-->
-    <!--</li>-->
-    <!--</ul>-->
-<!--</div>-->
+</div>
+
+
