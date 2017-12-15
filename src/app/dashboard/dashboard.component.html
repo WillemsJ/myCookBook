@@ -1,31 +1,52 @@
 <div *ngIf="(user | async)?.uid">
-  <h3>Dishes</h3>
-  <ul>
-    <li *ngFor="let typeOfDish of typesOfDishes"
-        [class.selected]="typeOfDish === selectedDish"
-        (click)="onSelect(typeOfDish)"
-        routerLink="/detail/{{typeOfDish.id}}">
-      <div class="module">
-        <a>{{typeOfDish.name}}</a>
-        <div>
-          <ul>
-
-          </ul>
+  <div *ngIf="">
+    <h3>Dishes</h3>
+  </div>
+  <div *ngIf="">
+    <h3>Drinks</h3>
+  </div>
+  <div *ngFor=" let dish of dishesKeys">
+    <div class="btn-group" dropdown>
+      <button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius
+              (click)="getDishes()">{{dish}}
+      </button>
+      <div class="dropdown-menu dropdown-primary">
+        <div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">
+          <ngb-alert type="info" [dismissible]="false">
+            <button >{{dish}}</button>
+          </ngb-alert>
+        </div>
+      </div>
+    </div>
+  </div>
+    <ul>
+      <li>
+        <div class="btn-group" dropdown>
+          <button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius
+                  (click)="getDishes()" *ngIf="(user | async)?.uid">Dishes
+          </button>
+          <div class="dropdown-menu dropdown-primary">
+            <div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">
+              <ngb-alert type="info" [dismissible]="false">
+                <button >{{dish}}</button>
+              </ngb-alert>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li>
+      <div class="btn-group" dropdown>
+        <button dropdownToggle type="button" class="btn listColor btn-default dropdown-toggle module" mdbRippleRadius
+                (click)="getDrinks()" *ngIf="(user | async)?.uid">Drinks
+        </button>
+        <div class="dropdown-menu dropdown-primary">
+          <div *ngFor=" let dish of dishesKeys" class="dropdown-item" href="#">
+            <ngb-alert type="info" [dismissible]="false">
+              <button >{{dish}}</button>
+            </ngb-alert>
+          </div>
         </div>
       </div>
     </li>
-  </ul>
+    </ul>
 </div>
-
-<!--<ul>-->
-  <!--<li *ngFor="let dish of typesOfDishes">-->
-      <!--routerLink="/detail/{{dish.id}}">-->
-    <!--<a>-->
-      <!--<div class="module dish">-->
-        <!--<h4>{{dish.name}}</h4>-->
-      <!--</div>-->
-    <!--</a>-->
-  <!--</li>-->
-<!--</ul>-->
-
-<!--<app-dish-search></app-dish-search>-->

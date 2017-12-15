@@ -44,19 +44,19 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 51, name: 'Sparkling Cranberry Splash'}
     ];
 
-    const units = [
-      {id: 100, name: 'cl'},
-      {id: 101, name: 'cup'},
-      {id: 102, name: 'dl'},
-      {id: 103, name: 'gr'},
-      {id: 104, name: 'ounces'},
-      {id: 105, name: 'spoon'}
-    ];
+    // const units = [
+    //   {id: 100, name: 'cl'},
+    //   {id: 101, name: 'cup'},
+    //   {id: 102, name: 'dl'},
+    //   {id: 103, name: 'gr'},
+    //   {id: 104, name: 'ounces'},
+    //   {id: 105, name: 'spoon'}
+    // ];
 
     const dishes = [
       {id: 1000, name: typesOfDishes},
       {id: 1001, name: aperitif},
-      {id: 1002, name: units}
+      // {id: 1002, name: units}
     ];
     return {typesOfDishes, appetizer, soup, mainDish, dessert, aperitif, dishes};
   }

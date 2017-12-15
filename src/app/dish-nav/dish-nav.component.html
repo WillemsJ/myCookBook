@@ -2,7 +2,7 @@
   <logo><a class="navbar-brand" href="#">{{appComp.title}}</a></logo>
   <links>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" style="margin-right: 1em">
@@ -16,7 +16,7 @@
         <a class="nav-link waves-light" mdbRippleRadius
            (click)="loginEmail()" *ngIf="!(user | async)?.uid">Login</a>
       </li>
-      <li class="nav-item" *ngIf="(user | async)?.uid">
+      <li class="nav-item">
         <a class="nav-link waves-light" mdbRippleRadius
            (click)="logout()" *ngIf="(user | async)?.uid">Logout</a>
       </li>
@@ -25,20 +25,20 @@
            type="button" class="nav-link dropdown-toggle waves-light" mdbRippleRadius>
           dropdown <span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
-          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="chooseDish()">Dishes</a>
-          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="chooseDrinks()">Drinks</a>
+          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="getDishes()">Dishes</a>
+          <a class="dropdown-item waves-light" mdbRippleRadius href="#" (click)="getDrinks()">Drinks</a>
         </div>
       </li>
     </ul>
     <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" #searchBox (keyup)="search(searchBox.value)">
-      <ul>
-        <li *ngFor="let typeOfDish of typeOfDishes$ | async">
-          <a routerLink="/detail/{{typeOfDish.id}}">
-            {{typeOfDish.name}}
-          </a>
-        </li>
-      </ul>
+      <app-dish-search></app-dish-search>
+      <!--<ul class="search-result">-->
+        <!--<li *ngFor="let dish of dishes | async">-->
+          <!--<a routerLink="/detail/{{dish.id}}">-->
+            <!--{{dish.name}}-->
+          <!--</a>-->
+        <!--</li>-->
+      <!--</ul>-->
     </form>
   </links>
 </mdb-navbar>

@@ -36,7 +36,7 @@ h4 {
 ul {
   list-style-type: none;
 }
-
+butt
 .grid {
   margin: 0;
 }
@@ -61,6 +61,10 @@ ul {
  }
 }
 
+.listColor {
+  background-color: #74a3ab !important;
+}
+
 .grid-pad {
   padding: 10px 0;
 > [class*='col-']:last-of-type {
@@ -82,4 +86,15 @@ ul {
   .module {
     min-width: 60px;
   }
+}
+
+// Overrides from Bootstrap SCCS API
+.btn,
+.btn-group {
+  width: 100% !important;
+  margin-left: -1em !important;
+}
+.dropdown-menu {
+  width: 100% !important;
+  margin-left: -0.8em !important;
 }

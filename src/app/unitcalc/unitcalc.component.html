@@ -1,3 +1,20 @@
 <p>
-  unitcalc works!
+  UnitCalc works!
 </p>
+<form *ngFor="let dishUnit of dishUnits">
+  <h2>Choose your units</h2>
+  <label>
+    From:
+    <select>
+      <option value="{{dishUnit}}">{{dishUnit}}</option>
+    </select>
+    <input type="text">
+  </label>
+  <label>
+    To:
+    <select>
+      <option value="{{dishUnit}}">{{dishUnit}}</option>
+    </select>
+    <input type="text">
+  </label>
+</form>

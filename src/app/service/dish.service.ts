@@ -7,6 +7,7 @@ import {catchError, map, tap} from "rxjs/operators";
 
 import { Dish } from "../dish";
 import { MessageService } from "./message.service";
+import {AngularFireDatabase} from "angularfire2/database";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -22,17 +23,55 @@ export class DishService {
   private mainDishUrl = 'api/mainDish';
   private dessertUrl = 'api/dessert';
   private aperitifUrl = 'api/aperitif';
+  private dishesKeys: string[];
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) { }
+    private messageService: MessageService,
+    private db: AngularFireDatabase) { }
 
-  getDishes(): Observable<Dish[]> {
-    // this.messageService.add('DishService: fetched dishes');
-    return this.http.get<Dish[]>(this.dishesUrl).pipe(
-        tap(dishes => this.log(`fetched dishes`)),
-        catchError(this.handleError('getDishes', []))
-    );
+  // getDishes(): Observable<Dish[]> {
+  //   // this.messageService.add('DishService: fetched dishes');
+  //   return this.http.get<Dish[]>(this.dishesUrl).pipe(
+  //       tap(dishes => this.log(`fetched dishes`)),
+  //       catchError(this.handleError('getDishes', []))
+  //   );
+  // }
+
+  getDishesKeys() {
+    return this.dishesKeys;
+  }
+
+  getDishes(listPath): Observable<any> {
+    return this.db.object(listPath).valueChanges();
+  }
+
+  getDrinks(listPath): Observable<any> {
+    return this.db.object(listPath).valueChanges();
+  }
+
+  getUnits(listPath): Observable<any[]> {
+    return this.db.list(listPath).valueChanges();
+  }
+
+  chooseDish() {
+    this.getDishes('/Dishes').subscribe((dishes) => {
+      console.log(dishes);
+      this.dishesKeys = Object.keys(dishes);
+    });
+  }
+  chooseDrinks() {
+    this.getDrinks('/Drinks').subscribe(drinks => {
+      console.log(drinks);
+      this.dishesKeys = Object.keys(drinks);
+    });
+  }
+
+  chooseUnits() {
+    this.getUnits('/Units').subscribe(units => {
+      console.log(units);
+      this.dishesKeys = units;
+    });
   }
 
   getTypesOfDishes(): Observable<Dish[]> {

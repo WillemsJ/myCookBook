@@ -11,7 +11,6 @@ import { InMemoryDataService } from './service/in-memory-data.service';
 import { AppRoutingModule } from './/app-routing.module';
 
 import { AppComponent } from './app.component';
-import { DishesComponent } from './dishes/dishes.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
 import { DishService } from "./service/dish.service";
 import { MessagesComponent } from './messages/messages.component';
@@ -31,7 +30,6 @@ import { AngularFireAuthModule} from 'angularfire2/auth';
 @NgModule({
   declarations: [
     AppComponent,
-    DishesComponent,
     DishDetailComponent,
     MessagesComponent,
     DashboardComponent,
