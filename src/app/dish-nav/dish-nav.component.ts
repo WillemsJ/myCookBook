@@ -28,12 +28,8 @@ export class DishNavComponent implements OnInit {
   // dishesKeys: string[];
   typeOfDishes$: Observable<Dish[]>;
   private searchTerms = new Subject<string>();
-
-  signInForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
-  });
-
+  email = 'email';
+  password = 'password';
 
   constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) { }
 
@@ -53,6 +49,13 @@ export class DishNavComponent implements OnInit {
       }
 
     });
+  }
+
+  changeEmail(ev) {
+    this.email = ev.target.value;
+  }
+  currentPassword(ev) {
+    this.password = ev.target.value;
   }
 
   loginEmail() {
