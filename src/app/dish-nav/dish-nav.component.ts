@@ -20,13 +20,13 @@ export class DishNavComponent implements OnInit {
   protected static dishNavComp: DishNavComponent;
 
   appComp = AppComponent.getInstance();
+  selectedCategory = '';
 
-  dishes: Dish[] = [];
   dishesObservable: Observable<any[]>;
   userPromise: Promise<firebase.User>;
   user: Observable<firebase.User>;
   // dishesKeys: string[];
-  typeOfDishes$: Observable<Dish[]>;
+
   private searchTerms = new Subject<string>();
   email = 'email';
   password = 'password';
@@ -69,6 +69,10 @@ export class DishNavComponent implements OnInit {
   logout() {
     this.db.database.goOffline();
     this.userPromise = this.afAuth.auth.signOut();
+  }
+
+  selectCategoryHandler(ev: any) {
+    this.selectedCategory = ev.target.value;
   }
 
   // getDishes(listPath): Observable<any> {
