@@ -8,12 +8,12 @@
 
       <!-- logging in form with loggin in button and logout button-->
       <li class="nav-item" style="margin-right: 1em">
-        <form>
-          <div *ngIf="!(user | async)?.uid" class="form-group">
+        <form *ngIf="!(user | async)?.uid">
+          <div  class="form-group">
             <input type="email" class="form-control" id="email" required   placeholder="email address"
                    [value]="email" (input)="changeEmail($event)">
           </div>
-          <div *ngIf="!(user | async)?.uid" class="form-group">
+          <div class="form-group">
             <input type="password" class="form-control" id="password" required placeholder="password"
                    [value]="password" (input)="currentPassword($event)">
           </div>

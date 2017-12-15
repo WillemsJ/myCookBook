@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Dish} from "../dish";
+import { Component, Input, OnInit } from '@angular/core';
 import {DishService} from "../service/dish.service";
 import {DishNavComponent} from "../dish-nav/dish-nav.component";
 import {Observable} from "rxjs/Observable";
@@ -13,8 +12,6 @@ import {AngularFireAuth} from "angularfire2/auth";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
-  dishes: Dish[] = [];
   dishesObservable: Observable<any[]>;
   user: Observable<firebase.User>;
   userPromise: Promise<firebase.User>;
@@ -22,9 +19,10 @@ export class DashboardComponent implements OnInit {
   dishesKeys: string[] = this.dishService.getDishesKeys();
 
   dishNavComp = DishNavComponent.getDishNavMethods();
+  @Input() public getCategory: string;
 
-
-  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) { }
+  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+  }
 
   ngOnInit() {
     this.afAuth.authState.subscribe(auth => {
@@ -40,57 +38,36 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // getDishes(): void {
-  //   this.dishService.getDishes()
-  //     .subscribe(dishes => this.dishes = dishes.slice(0, dishes.length));
-  // }
-
-  // getDishes(listPath): Observable<any> {
-  //   return this.db.object(listPath).valueChanges();
-  // }
-  //
-  // getDrinks(listPath): Observable<any> {
-  //   return this.db.object(listPath).valueChanges();
-  // }
-  //
-  // getUnits(listPath): Observable<any[]> {
-  //   return this.db.list(listPath).valueChanges();
-  // }
-  //
-  // chooseDish() {
-  //   this.getDishes('/Dishes').subscribe((dishes) => {
-  //     console.log(dishes);
-  //     this.dishesKeys = Object.keys(dishes);
-  //   });
-  // }
-  // chooseDrinks() {
-  //   this.getDrinks('/Drinks').subscribe(drinks => {
-  //     console.log(drinks);
-  //     this.dishesKeys = Object.keys(drinks);
-  //   });
-  // }
-  //
-  // chooseUnits() {
-  //   this.getUnits('/Units').subscribe(units => {
-  //     console.log(units);
-  //     this.dishesKeys = units;
-  //   });
-  // }
-
-  getDishes() {
-    this.dishService.chooseDish();
+  getDishes(listPath): Observable<any> {
+      return this.db.object(listPath).valueChanges();
   }
 
-  getDrinks() {
-    this.dishService.chooseDrinks();
+  getDrinks(listPath): Observable<any> {
+      return this.db.object(listPath).valueChanges();
   }
 
-  getUnits() {
-    this.dishService.chooseUnits();
+  getUnits(listPath): Observable<any[]> {
+    return this.db.list(listPath).valueChanges();
   }
 
-  // onSelect(dish: any): void {
-  //   dish = this.dishNavComp.chooseDish();
-  //   this.selectedDish = dish;
-  // }
+  chooseDish() {
+    this.getDishes('/Dishes').subscribe((dishes) => {
+      console.log(dishes);
+      this.dishesKeys = Object.keys(dishes);
+    });
+  }
+
+  chooseDrinks() {
+    this.getDrinks('/Drinks').subscribe(drinks => {
+      console.log(drinks);
+      this.dishesKeys = Object.keys(drinks);
+    });
+  }
+
+  chooseUnits() {
+    this.getUnits('/Units').subscribe(units => {
+      console.log(units);
+      this.dishesKeys = units;
+    });
+  }
 }

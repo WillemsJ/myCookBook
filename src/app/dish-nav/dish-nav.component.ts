@@ -20,18 +20,19 @@ export class DishNavComponent implements OnInit {
   protected static dishNavComp: DishNavComponent;
 
   appComp = AppComponent.getInstance();
-  selectedCategory = '';
+  public selectedCategory = '';
 
   dishesObservable: Observable<any[]>;
   userPromise: Promise<firebase.User>;
   user: Observable<firebase.User>;
-  // dishesKeys: string[];
 
   private searchTerms = new Subject<string>();
   email = 'email';
   password = 'password';
 
-  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) { }
+
+  constructor(private dishService: DishService, private db: AngularFireDatabase, public afAuth: AngularFireAuth) {
+  }
 
   static getDishNavMethods(): DishNavComponent {
     return this.dishNavComp;
@@ -54,14 +55,16 @@ export class DishNavComponent implements OnInit {
   changeEmail(ev) {
     this.email = ev.target.value;
   }
+
   currentPassword(ev) {
     this.password = ev.target.value;
   }
 
   loginEmail() {
-    this.userPromise = this.afAuth.auth.signInWithEmailAndPassword('jwillems04@gmail.com', 'seth1704Apr9l');
+    this.userPromise = this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
     console.log(this.userPromise);
   }
+
   loginAnonymous() {
     this.userPromise = this.afAuth.auth.signInAnonymously();
   }
@@ -74,53 +77,5 @@ export class DishNavComponent implements OnInit {
   selectCategoryHandler(ev: any) {
     this.selectedCategory = ev.target.value;
   }
-
-  // getDishes(listPath): Observable<any> {
-  //   return this.db.object(listPath).valueChanges();
-  // }
-  //
-  // getDrinks(listPath): Observable<any> {
-  //   return this.db.object(listPath).valueChanges();
-  // }
-  //
-  // getUnits(listPath): Observable<any[]> {
-  //   return this.db.list(listPath).valueChanges();
-  // }
-  //
-  // chooseDish() {
-  //   this.getDishes('/Dishes').subscribe((dishes) => {
-  //     console.log(dishes);
-  //     this.dishesKeys = Object.keys(dishes);
-  //   });
-  // }
-  // chooseDrinks() {
-  //   this.getDrinks('/Drinks').subscribe(drinks => {
-  //     console.log(drinks);
-  //     this.dishesKeys = Object.keys(drinks);
-  //   });
-  // }
-  //
-  // chooseUnits() {
-  //   this.getUnits('/Units').subscribe(units => {
-  //     console.log(units);
-  //     this.dishesKeys = units;
-  //   });
-  // }
-
-  getDishes() {
-    this.dishService.chooseDish();
-  }
-
-  getDrinks() {
-    this.dishService.chooseDrinks();
-  }
-
-  // getUnits() {
-  //   this.dishService.chooseUnits();
-  // }
-  //
-  // search(term: string): void {
-  //   this.searchTerms.next(term);
-  // }
 
 }
