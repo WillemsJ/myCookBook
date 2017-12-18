@@ -1,20 +1,20 @@
 <div *ngIf="(user | async)?.uid">
-    <p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>
-      <div *ngFor=" let dish of food">
-        <ngb-alert type="info" [dismissible]="false">
-          <div class="dropdown" dropdown>
-            <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" type="button" mdbRippleRadius>
-              {{dish}}
-            </button>
-            <div class="dropdown-menu dropdown-warning">
-              <a class="dropdown-item" [dishName]="dishName">Action</a>
-              <a class="dropdown-item">Another Action</a>
-              <a class="dropdown-item">And Another Action</a>
-              <a class="dropdown-item">And Yet Another Action</a>
-            </div>
-          </div>
-        </ngb-alert>
+  <p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>
+  <div *ngFor=" let dish of food">
+    <ngb-alert type="info" [dismissible]="false">
+      <div id="dropdowncategory" class="dropdown" dropdown>
+        <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="sendCategoryIndex(dish)"
+                type="button" mdbRippleRadius>
+          {{dish}}
+        </button>
+        <div class="dropdown-menu dropdown-warning">
+          <ng-template ngFor let-recipe [ngForOf]="recipeIndex">
+            <a class="dropdown-item" href="#">{{recipe}}</a>
+          </ng-template>
+        </div>
       </div>
+    </ngb-alert>
+  </div>
 </div>
 
 

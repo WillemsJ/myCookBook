@@ -39,10 +39,6 @@ export class DishService {
     return this.dishesKeys;
   }
 
-  getRecipeByID(id: number) {
-    this.event.observe('changedCategory').get;
-  }
-
   getDishes(listPath): Observable<any> {
     return this.db.object(listPath).valueChanges();
   }
@@ -57,7 +53,7 @@ export class DishService {
 
   chooseDish() {
     this.getDishes('/Dishes').subscribe((dishes) => {
-      console.log(dishes);
+      // console.log(dishes);
       this.dishesKeys = Object.keys(dishes);
     });
   }
