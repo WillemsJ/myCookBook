@@ -19,7 +19,6 @@ export class DashboardComponent implements OnInit {
   userPromise: Promise<firebase.User>;
   foodKeys: string[];
   food: string[];
-  dishNavComp = DishNavComponent.getDishNavMethods();
 
   category: any;
   subscription: Subscription;
