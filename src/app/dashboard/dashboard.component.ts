@@ -51,23 +51,21 @@ export class DashboardComponent implements OnInit {
   }
 
   sendCategoryIndex(dish) {
-    console.log(dish);
-
-    // if (this.dish = 'Appetizer') {
-    //   this.sendAppetizers();
-    // }
-    // if (document.getElementById('category').innerText = 'Soup') {
-    //   this.sendSoups();
-    // }
-    // if (document.getElementById('category').innerText = 'MainDish') {
-    //   this.sendMainDishes();
-    // }
-    // if (document.getElementById('category').innerText = 'Cake') {
-    //   this.sendCakes();
-    // }
-    // if (document.getElementById('category').innerText = 'Dessert') {
-    //   this.sendDesserts();
-    // }
+    if (dish === 'Appetizer') {
+      this.sendAppetizers();
+    }
+    if (dish === 'Soup') {
+      this.sendSoups();
+    }
+    if (dish === 'MainDish') {
+      this.sendMainDishes();
+    }
+    if (dish === 'Cake') {
+      this.sendCakes();
+    }
+    if (dish === 'Dessert') {
+      this.sendDesserts();
+    }
   }
 
   private sendAppetizers() {
