@@ -3,7 +3,8 @@
   <links>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+        <!--<a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>-->
+        <a class="nav-link waves-light" routerLink="home" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
       </li>
       <!-- logging in form with loggin in button and logout button-->
       <li class="nav-item" style="margin-right: 1em">
@@ -30,12 +31,24 @@
            (click)="logout()" *ngIf="(user | async)?.uid">Logout</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-              mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">Dishes</a>
+          <!--<a class="nav-link waves-light" *ngIf="(user | async)?.uid"-->
+              <!--mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">Dishes</a>-->
+        <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
+           [routerLink]="['/recipes', {outlets: {'list': ['recipesList'], 'detail': ['none']}}]"
+              mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">
+          Dishes
+        </a>
       </li>
       <li class="nav-item">
-          <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-              mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">Drinks</a>
+        <!--<a class="nav-link waves-light" *ngIf="(user | async)?.uid"-->
+           <!--mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">-->
+          <!--Drinks-->
+        <!--</a>-->
+        <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
+           [routerLink]="['/recipes', {outlets: {'list': ['recipesList'], 'detail': ['none']}}]"
+           mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">
+          Drinks
+        </a>
       </li>
     </ul>
     <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">

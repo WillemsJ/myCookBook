@@ -8,6 +8,7 @@ import {catchError, map, tap} from "rxjs/operators";
 import { Dish } from "../dish";
 import { MessageService } from "./message.service";
 import {AngularFireDatabase} from "angularfire2/database";
+import {EventBusService} from "./event-bus.service";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,9 +20,11 @@ export class DishService {
   private dishesUrl = 'api/dishes'; // URL to web api
   private dishesKeys: string[];
 
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
+    private event: EventBusService,
     private db: AngularFireDatabase) { }
 
   // getDishes(): Observable<Dish[]> {
@@ -34,6 +37,10 @@ export class DishService {
 
   getDishesKeys() {
     return this.dishesKeys;
+  }
+
+  getRecipeByID(id: number) {
+    this.event.observe('changedCategory').get;
   }
 
   getDishes(listPath): Observable<any> {
@@ -63,7 +70,7 @@ export class DishService {
 
   chooseUnits() {
     this.getUnits('/Units').subscribe(units => {
-      console.log(units);
+      // console.log(units);
       this.dishesKeys = units;
     });
   }
