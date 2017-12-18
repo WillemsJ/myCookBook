@@ -2,16 +2,19 @@
     <p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>
       <div *ngFor=" let dish of food">
         <ngb-alert type="info" [dismissible]="false">
-          <button>{{dish}}</button>
+          <div class="dropdown" dropdown>
+            <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" type="button" mdbRippleRadius>
+              {{dish}}
+            </button>
+            <div class="dropdown-menu dropdown-warning">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another Action</a>
+              <a class="dropdown-item" href="#">And Another Action</a>
+              <a class="dropdown-item" href="#">And Yet Another Action</a>
+            </div>
+          </div>
         </ngb-alert>
       </div>
-    <!--<div  >-->
-      <!--<div *ngFor=" let drink of drinkskeys" >-->
-        <!--<ngb-alert type="info" [dismissible]="false">-->
-          <!--<button>{{drink}}</button>-->
-        <!--</ngb-alert>-->
-      <!--</div>-->
-    <!--</div>-->
 </div>
 
 

@@ -5,14 +5,16 @@
       <li class="nav-item">
         <a class="nav-link waves-light" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
       </li>
-
       <!-- logging in form with loggin in button and logout button-->
       <li class="nav-item" style="margin-right: 1em">
         <form *ngIf="!(user | async)?.uid">
           <div  class="form-group">
-            <input type="email" class="form-control" id="email" required   placeholder="email address"
+            <input type="email" class="form-control" id="email" required placeholder="email address"
                    [value]="email" (input)="changeEmail($event)">
           </div>
+        </form>
+      <li class="nav-item" style="margin-right: 1em">
+        <form *ngIf="!(user | async)?.uid">
           <div class="form-group">
             <input type="password" class="form-control" id="password" required placeholder="password"
                    [value]="password" (input)="currentPassword($event)">
@@ -27,17 +29,14 @@
         <a class="nav-link waves-light" mdbRippleRadius
            (click)="logout()" *ngIf="(user | async)?.uid">Logout</a>
       </li>
-
-      <div *ngIf="(user | async)?.uid">
-        <button (click)="sendDishesCategory()" value="Dishes">Dishes</button>
-        <button (click)="sendDrinksCategory()" value="Drinks">Drinks</button>
-      </div>
-      <!-- selfmade dropdown experiment-->
-      <!--<select *ngIf="(user | async)?.uid" (change)="selectCategoryHandler($event)">-->
-        <!--<option (click)="sendDishesCategory()" value="Dishes">Dishes</option>-->
-        <!--<option (click)="sendDrinksCategory()" value="Drinks">Drinks</option>-->
-      <!--</select>-->
-      <!--<p *ngIf="(user | async)?.uid"><span>You selected:</span><b>{{selectedCategory}}</b></p>-->
+      <li class="nav-item">
+          <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
+              mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">Dishes</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
+              mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">Drinks</a>
+      </li>
     </ul>
     <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">
       <app-dish-search></app-dish-search>
