@@ -21,7 +21,6 @@ export class DashboardComponent implements OnInit {
   recipeIndex: string[];
 
   category: any;
-  categoryIndex = '';
   subscription: Subscription;
 
 
@@ -41,7 +40,7 @@ export class DashboardComponent implements OnInit {
         this.user = this.afAuth.authState;
 
         this.processData();
-        this.getCategoryIndex();
+        this.getRecipeIndex();
       }
       if (!(auth && auth.uid)) {
         this.dishesObservable = null;
@@ -54,38 +53,36 @@ export class DashboardComponent implements OnInit {
 
   sendCategoryIndex(dish) {
     if (dish === 'Appetizer') {
-      this.sendAppetizers();
+      this.event.emit('changedCategoryIndex', {listPath: '/Appetizer'});
+      // this.sendAppetizers();
     }
     if (dish === 'Soup') {
-      this.sendSoups();
+      this.event.emit('changedCategoryIndex', {listPath: '/Soup'});
     }
     if (dish === 'MainDish') {
-      this.sendMainDishes();
+      this.event.emit('changedCategoryIndex', {listPath: '/MainDish'});
     }
     if (dish === 'Cake') {
-      this.sendCakes();
+      // this.sendCakes();
+      this.event.emit('changedCategoryIndex', {listPath: '/Cake'});
     }
     if (dish === 'Dessert') {
-      this.sendDesserts();
+      // this.sendDesserts();
+      this.event.emit('changedCategoryIndex', {listPath: '/Dessert'});
+    }
+    if (dish === 'WarmDrink') {
+      this.event.emit('changedCategoryIndex', {listPath: '/WarmDrink'});
+    }
+    if (dish === 'ColdDrink') {
+      this.event.emit('changedCategoryIndex', {listPath: '/ColdDrink'});
+    }
+    if (dish === 'AlcoholFreeCocktail') {
+      this.event.emit('changedCategoryIndex', {listPath: '/AlcoholFreeCocktail'});
+    }
+    if (dish === 'AlcoholCocktail') {
+      this.event.emit('changedCategoryIndex', {listPath: '/AlcoholCocktail'});
     }
   }
-
-  private sendAppetizers() {
-    this.event.emit('changedCategoryIndex', {listPath: '/Appetizer'});
-  }
-  private sendSoups() {
-    this.event.emit('changedCategoryIndex', {listPath: '/Soup'});
-  }
-  private sendMainDishes() {
-    this.event.emit('changedCategoryIndex', {listPath: '/MainDish'});
-  }
-  private sendCakes() {
-    this.event.emit('changedCategoryIndex', {listPath: '/Cake'});
-  }
-  private sendDesserts() {
-    this.event.emit('changedCategoryIndex', {listPath: '/Dessert'});
-  }
-
 
   private processData(): void {
     this.event.observe('changedCategory').subscribe((value) => {
@@ -102,12 +99,18 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  private getCategoryIndex(): void {
+  private getRecipeIndex(): void {
     this.event.observe('changedCategoryIndex').subscribe((value) => {
         this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
           this.recipeIndex = Object.keys(recipes);
           console.log(this.recipeIndex);
         });
+    });
+    this.event.observe('changedCategoryIndex').subscribe((value) => {
+      this.db.object('/Drinks' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+        this.recipeIndex = Object.keys(recipes);
+        console.log(this.recipeIndex);
+      });
     });
   }
 }
