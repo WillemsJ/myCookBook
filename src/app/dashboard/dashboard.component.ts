@@ -33,6 +33,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  dishName = "";
+
   ngOnInit() {
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {

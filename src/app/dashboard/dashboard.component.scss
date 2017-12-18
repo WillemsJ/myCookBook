@@ -92,9 +92,10 @@ butt
 .btn,
 .btn-group {
   width: 100% !important;
-  margin-left: -1em !important;
+  margin: .5em auto;
+  //margin-left: -.5em !important;
 }
 .dropdown-menu {
   width: 100% !important;
-  margin-left: -0.8em !important;
+  margin-left: -.4em;
 }

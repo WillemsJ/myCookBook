@@ -1,9 +1,14 @@
 <div *ngIf="(user | async)?.uid">
-  <div *ngIf="dish" (click)="setDish(dish)">
-  <h2>{{ dish.name | uppercase }} Details</h2>
-  <div><span>id: </span>{{dish.id}}</div>
-  <div><span>name: </span>{{dish.name}}</div>
-  <div><span>requirements: </span>dummy</div>
-  <div><span>prepared manner: </span>dummy</div>
+  <div *ngIf="!currentRecipe">
+    <p>Please select a recipe</p>
+    <p>No recipe selected</p>
+  </div>
+  <div *ngIf="currentRecipe">
+    <h2>{{ currentRecipe | uppercase }} Details</h2>
+    <div><span>name: </span>{{dishName}}</div>
+    <div><img class="dish-image" src="http://lorempixel.com/400/200/food/"/></div>
+    <div><span>requirements: </span>dummy</div>
+    <div><span>prepared manner: </span>dummy</div>
+  </div>
 </div>
-</div>
+
