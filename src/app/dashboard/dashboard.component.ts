@@ -88,13 +88,12 @@ export class DashboardComponent implements OnInit {
       this.event.emit('changedCategoryIndex', {listPath: '/AlcoholCocktail'});
     }
   }
-<<<<<<< HEAD
+
   chooseDish(recipeName){
     this.dishEvent.emit(recipeName);
     console.log('chooseDish: ' + this.dishEvent);
   }
-=======
->>>>>>> 1e1c76a042df2411ecf547d34b186aabaabafd76
+
   private processData(): void {
     this.event.observe('changedCategory').subscribe((value) => {
       // console.log(value.listPath);
