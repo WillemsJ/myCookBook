@@ -9,7 +9,7 @@ import {Component, Input} from '@angular/core';
 
 export class AppComponent {
 
-
+  dishType: string;
 
   protected static appcomp: AppComponent;
 
@@ -20,6 +20,10 @@ export class AppComponent {
       this.appcomp = new AppComponent();
     }
     return this.appcomp;
+  }
+
+  dishEvent(dishType){
+    this.dishType = dishType;
   }
 
 

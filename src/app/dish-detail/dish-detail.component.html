@@ -1,14 +1,17 @@
 <div *ngIf="(user | async)?.uid">
-  <div *ngIf="!currentRecipe">
+  <!--<p>{{dishType}}</p>-->
+  <div *ngIf="!dishType">
     <p>Please select a recipe</p>
     <p>No recipe selected</p>
   </div>
-  <div *ngIf="currentRecipe">
-    <h2>{{ currentRecipe | uppercase }} Details</h2>
-    <div><span>name: </span>{{dishName}}</div>
-    <div><img class="dish-image" src="http://lorempixel.com/400/200/food/"/></div>
-    <div><span>requirements: </span>dummy</div>
-    <div><span>prepared manner: </span>dummy</div>
+  <div *ngIf="dishType">
+    <div (dishEvent)="getDish($event)">
+      <h2>{{ dishType | uppercase }} Details</h2>
+      <div><span>name: </span>{{dishType}}</div>
+      <div><img class="dish-image" src="http://lorempixel.com/400/200/food/"/></div>
+      <div><span>requirements: </span>{{recipesDetails}}</div>
+      <div><span>prepared manner: </span>{{recipesDetails}}</div>
+    </div>
   </div>
 </div>
 

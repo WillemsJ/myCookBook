@@ -5,10 +5,10 @@
        fxLayout="row"
        fxFlexFill>
     <div fxFlex="30" class="secList">
-      <app-dashboard></app-dashboard>
+      <app-dashboard (dishEvent)="dishEvent($event)"></app-dashboard>
     </div>
     <div fxFlex="45" class="secIngredients">
-      <app-dish-detail></app-dish-detail>
+      <app-dish-detail [dishType]="dishType"></app-dish-detail>
     </div>
     <div fxFlex="35" class="secUnits">
       <app-unitcalc></app-unitcalc>

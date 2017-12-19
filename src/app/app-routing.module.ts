@@ -14,7 +14,7 @@ import {DishNavComponent} from "./dish-nav/dish-nav.component";
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: DashboardComponent },
+  { path: 'home', component: DishNavComponent },
   { path: 'recipes', component:DishNavComponent, children: [
       { path: 'recipesList', component: DashboardComponent, outlet: 'list' },
       { path: ':id', component: DishDetailComponent, outlet: 'detail' }
