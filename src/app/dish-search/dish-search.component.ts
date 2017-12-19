@@ -7,7 +7,6 @@ import { of } from "rxjs/observable/of";
 import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 
 import { Dish } from "../dish";
-import { DishService } from "../service/dish.service";
 
 @Component({
   selector: 'app-dish-search',
@@ -19,7 +18,7 @@ export class DishSearchComponent implements OnInit {
   typeOfDishes$: Observable<Dish[]>;
   private searchTerms = new Subject<String>();
 
-  constructor(private dishService: DishService) { }
+  constructor() { }
 
   // push a search term into the observable stream.
   search(term: string): void {
@@ -27,20 +26,20 @@ export class DishSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dishes$ = this.searchTerms.pipe(
-      // wait 300ms after keystroke before considering the term
-      debounceTime(300),
-      // ignore the new term is the same as previous term
-      distinctUntilChanged(),
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.dishService.searchDishes(term)),
+    // this.dishes$ = this.searchTerms.pipe(
+    //   // wait 300ms after keystroke before considering the term
+    //   debounceTime(300),
+    //   // ignore the new term is the same as previous term
+    //   distinctUntilChanged(),
+    //   // switch to new search observable each time the term changes
+    //   switchMap((term: string) => this.dishService.searchDishes(term)),
 
-    );
-    this.typeOfDishes$ = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => this.dishService.searchDishes(term)),
-    );
+    // );
+    // this.typeOfDishes$ = this.searchTerms.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   switchMap((term: string) => this.dishService.searchDishes(term)),
+    // );
   }
 
 }

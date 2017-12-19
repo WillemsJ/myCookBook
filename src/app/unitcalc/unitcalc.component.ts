@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {DishService} from "../service/dish.service";
 
 @Component({
   selector: 'app-unitcalc',
@@ -17,9 +16,6 @@ export class UnitcalcComponent implements OnInit {
     'gr',
     'tblsp'
   ];
-
-  dishUnits = this.dishService.chooseUnits();
-
   ounces: number;
   cl: number;
   dl: number;
@@ -27,7 +23,7 @@ export class UnitcalcComponent implements OnInit {
   gr: number;
   spoon: number;
 
-  constructor(private dishService: DishService) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -49,7 +45,7 @@ export class UnitcalcComponent implements OnInit {
           break;
         case 'gr':
           input *= 0.035274;
-          break
+          break;
       }
     }
     return input;
@@ -78,18 +74,18 @@ export class UnitcalcComponent implements OnInit {
   }
 
     toDl(): number {
-      return
+      return;
     }
 
     toCup(): number {
-      return
+      return;
     }
 
     toGr(): number {
-      return
+      return;
     }
 
     toSpoons(): number {
-      return
+      return;
     }
   }

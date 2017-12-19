@@ -12,7 +12,6 @@ import { AppRoutingModule } from './/app-routing.module';
 
 import { AppComponent } from './app.component';
 import { DishDetailComponent } from './dish-detail/dish-detail.component';
-import { DishService } from "./service/dish.service";
 import { MessagesComponent } from './messages/messages.component';
 import {MessageService} from "./service/message.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -53,7 +52,7 @@ import { EventBusService} from './service/event-bus.service';
     FlexLayoutModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [DishService, MessageService, CategoryService, EventBusService],
+  providers: [MessageService, CategoryService, EventBusService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 
