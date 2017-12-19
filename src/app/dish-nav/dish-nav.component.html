@@ -34,7 +34,7 @@
           <!--<a class="nav-link waves-light" *ngIf="(user | async)?.uid"-->
               <!--mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">Dishes</a>-->
         <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-           [routerLink]="['/recipes', {outlets: {'list': ['recipesList'], 'detail': ['none']}}]"
+           [routerLink]="['/recipes', {'list': ['recipesList'], 'detail': ['none']}]"
               mdbRippleRadius (click)="sendDishesCategory()" value="Dishes">
           Dishes
         </a>
@@ -45,7 +45,7 @@
           <!--Drinks-->
         <!--</a>-->
         <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-           [routerLink]="['/recipes', {outlets: {'list': ['recipesList'], 'detail': ['none']}}]"
+           [routerLink]="['/recipes', {'list': ['recipesList'], 'detail': ['none']}]"
            mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">
           Drinks
         </a>

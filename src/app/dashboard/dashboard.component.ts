@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { DishNavComponent } from '../dish-nav/dish-nav.component';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
@@ -14,6 +14,9 @@ import { EventBusService } from '../service/event-bus.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  @Output() dishEvent = new EventEmitter<any>();
+
   dishesObservable: Observable<any[]>;
   user: Observable<firebase.User>;
   userPromise: Promise<firebase.User>;
@@ -21,8 +24,9 @@ export class DashboardComponent implements OnInit {
   recipeIndex: string[];
 
   category: any;
-  categoryIndex = '';
   subscription: Subscription;
+
+  public selectedFood: number;
 
 
   constructor(private categoryService: CategoryService, private db: AngularFireDatabase,
@@ -33,7 +37,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  dishName = "";
 
   ngOnInit() {
     this.afAuth.authState.subscribe(auth => {
@@ -52,7 +55,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  sendCategoryIndex(dish) {
+  sendCategoryIndex(dish, index) {
+    this.selectedFood = index;
     if (dish === 'Appetizer') {
       this.sendAppetizers();
     }
@@ -68,6 +72,11 @@ export class DashboardComponent implements OnInit {
     if (dish === 'Dessert') {
       this.sendDesserts();
     }
+  }
+
+  chooseDish(recipeName){
+    this.dishEvent.emit(recipeName);
+    console.log('chooseDish: ' + this.dishEvent);
   }
 
   private sendAppetizers() {

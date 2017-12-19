@@ -1,16 +1,18 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { Location } from "@angular/common";
 
 import { Dish } from "../dish";
-import { DishService } from "../service/dish.service";
 import {CategoryService} from "../service/chosencategory.service";
 import {Subscription} from "rxjs/Subscription";
 import {EventBusService} from "../service/event-bus.service";
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase, AngularFireList} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
+import {DishNavComponent} from "../dish-nav/dish-nav.component";
+import {DashboardComponent} from "../dashboard/dashboard.component";
+import {FirebaseListObservable} from "angularfire2/database-deprecated";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-dish-detail',
@@ -20,31 +22,25 @@ import * as firebase from "firebase";
 
 export class DishDetailComponent implements OnInit {
 
-  @Input() dishName: string;
+  @Input() dishType: string;
 
   dishesObservable: Observable<any[]>;
   user: Observable<firebase.User>;
   userPromise: Promise<firebase.User>;
   category: any;
   subscription: Subscription;
-  receipes: string[];
   currentRecipe: Dish;
+  recipesDetails: AngularFireList<any>;
 
-  private currentDish;
-
-  setDish(dish) {
-    if (this.currentDish === dish) return;
-    this.currentDish = dish;
-  }
 
   constructor(
     private route: ActivatedRoute,
     private db: AngularFireDatabase,
     private categoryService: CategoryService,
     private event: EventBusService,
-    private location: Location,
     public afAuth: AngularFireAuth) {
     this.subscription = this.categoryService.getCategory().subscribe(category => this.category = category);
+    this.recipesDetails = db.list('recipes');
   }
 
   ngOnInit(): void {
@@ -60,15 +56,14 @@ export class DishDetailComponent implements OnInit {
 
     });
 
-    this.getDish();
   }
 
-  goBack(): void {
-    this.location.back();
+  getDish($event): void {
+    this.currentRecipe = $event;
   }
 
-  getDish(): void {
-    this.categoryService.getCategory()
-      .subscribe(dish => this.dish = dish);
-  }
+  // getDishDetails() {
+  // }
+
+
 }
