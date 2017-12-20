@@ -1,21 +1,19 @@
-<p>
-  UnitCalc works!
-</p>
-<form *ngFor="let dishUnit of dishUnits">
-  {{console.log(dishUnit, "from unitcalc")}}
+<form [formGroup]="unitCalcForm" novalidate>
   <h2>Choose your units</h2>
   <label>
     From:
-    <select>
-      <option value="{{dishUnit}}">{{dishUnit}}</option>
+    <select formControlName="fromType">
+      <option *ngFor="let unit of units" value="{{unit.name}}" (click)="getValueFromSelect(selectedValue.value)">{{unit.name}}</option>
     </select>
-    <input type="text">
+    <input formControlName="fromValue" type="number" (inputEvent)="getInput($event)">
+    <p *ngIf="unitCalcForm.get('fromValue').hasError('min')">Value has to be > 0</p>
   </label>
   <label>
     To:
-    <select>
-      <option value="{{dishUnit}}">{{dishUnit}}</option>
+    <select formControlName="toType">
+      <option *ngFor="let unit of units" value="{{unit.name}}" (click)="getValueFromOutputSelect(selecteOutputValue.value)">{{unit.name}}</option>
     </select>
-    <input type="text">
+    <input type="text" value="{{resultConvertion}}">
+    <button type="button" (click)="calculate()">Calculate</button>
   </label>
 </form>

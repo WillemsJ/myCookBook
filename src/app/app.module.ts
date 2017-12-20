@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { MDBBootstrapModule } from "angular-bootstrap-md/index";
@@ -45,6 +45,7 @@ import { EventBusService} from './service/event-bus.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(

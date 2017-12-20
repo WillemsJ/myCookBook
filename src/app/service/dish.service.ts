@@ -9,6 +9,7 @@ import { Dish } from "../dish";
 import { MessageService } from "./message.service";
 import {AngularFireDatabase} from "angularfire2/database";
 import {EventBusService} from "./event-bus.service";
+import {FirebaseListObservable} from "angularfire2/database-deprecated";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -25,7 +26,8 @@ export class DishService {
     private http: HttpClient,
     private messageService: MessageService,
     private event: EventBusService,
-    private db: AngularFireDatabase) { }
+    private db: AngularFireDatabase) {
+  }
 
   // getDishes(): Observable<Dish[]> {
   //   // this.messageService.add('DishService: fetched dishes');
