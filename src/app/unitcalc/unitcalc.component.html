@@ -7,6 +7,13 @@
     </select>
     <input formControlName="fromValue" type="number" (inputEvent)="getInput($event)">
     <p *ngIf="unitCalcForm.get('fromValue').hasError('min')">Value has to be > 0</p>
+    <div *ngIf="unitCalcForm.get('fromType').value == 'cup' || unitCalcForm.get('fromType').value == 'tblsp'" >
+      <p class="unitWarning">{{cupWarning}}</p>
+      <div *ngFor="let cupToGramIngredient of cupToGramIngredients">
+        <input class="radioClass" formControlName="cupOrTblspToXIngredients" type="radio"
+               value="{{cupToGramIngredient.name}}"> {{cupToGramIngredient.name}} <br>
+      </div>
+    </div>
   </label>
   <label>
     To:

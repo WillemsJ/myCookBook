@@ -1,5 +1,6 @@
 input {
   background: none;
+  border-bottom: solid 1px #888888;
 }
 
 select {
@@ -9,10 +10,16 @@ select {
 }
 
 button {
-  border: solid .5px #888888;
+  border: solid .5px #000000;
   border-radius: 5px;
   background-color: rgba(255,255,255, .8);
   margin-top: 1em;
   float: right;
 }
-
+.unitWarning {
+  color: red;
+  margin: .5em;
+}
+.radioClass {
+  margin-right: 1em;
+}

@@ -27,6 +27,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { CategoryService } from './service/chosencategory.service';
 import { EventBusService} from './service/event-bus.service';
+import {UnitCalcService} from "./service/unit-calc.service";
 
 
 @NgModule({
@@ -54,7 +55,7 @@ import { EventBusService} from './service/event-bus.service';
     FlexLayoutModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [DishService, MessageService, CategoryService, EventBusService],
+  providers: [DishService, MessageService, CategoryService, EventBusService, UnitCalcService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 

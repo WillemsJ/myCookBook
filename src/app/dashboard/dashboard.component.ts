@@ -111,9 +111,9 @@ export class DashboardComponent implements OnInit {
 
   private getRecipeIndex(): void {
     this.event.observe('changedCategoryIndex').subscribe((value) => {
-        this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
-          this.recipeIndex = Object.keys(recipes);
-          console.log(this.recipeIndex);
+      this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+        this.recipeIndex = Object.keys(recipes);
+          // console.log(this.recipeIndex);
         });
     });
     this.event.observe('changedCategoryIndex').subscribe((value) => {
