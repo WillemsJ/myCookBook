@@ -26,6 +26,9 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { CategoryService } from './service/chosencategory.service';
 import { EventBusService} from './service/event-bus.service';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { FirestoreService } from './service/firestore.service';
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
 
 @NgModule({
@@ -36,13 +39,15 @@ import { EventBusService} from './service/event-bus.service';
     DashboardComponent,
     DishSearchComponent,
     DishNavComponent,
-    UnitcalcComponent
+    UnitcalcComponent,
+    AddRecipeComponent,
   ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
@@ -52,7 +57,7 @@ import { EventBusService} from './service/event-bus.service';
     FlexLayoutModule,
     MDBBootstrapModule.forRoot()
   ],
-  providers: [MessageService, CategoryService, EventBusService],
+  providers: [MessageService, CategoryService, EventBusService, FirestoreService],
   bootstrap: [AppComponent],
   schemas: [NO_ERRORS_SCHEMA]
 

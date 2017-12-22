@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import { DishNavComponent } from '../dish-nav/dish-nav.component';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -7,6 +6,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { CategoryService } from '../service/chosencategory.service';
 import { Subscription } from 'rxjs/Subscription';
 import { EventBusService } from '../service/event-bus.service';
+
+import { FirestoreService} from '../service/firestore.service';
+import { RecipeId} from '../cookbookRecipes/recipe-id';
+import { AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Recipe } from '../cookbookRecipes/recipe';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,24 +20,31 @@ import { EventBusService } from '../service/event-bus.service';
 export class DashboardComponent implements OnInit {
 
   @Output() dishEvent = new EventEmitter<any>();
-
   dishesObservable: Observable<any[]>;
   user: Observable<firebase.User>;
   userPromise: Promise<firebase.User>;
   food: string[];
   recipeIndex: string[];
-
   category: any;
   subscription: Subscription;
-
   public selectedFood: number;
 
 
-  constructor(private categoryService: CategoryService, private db: AngularFireDatabase,
+  recipeCollection: AngularFirestoreCollection<Recipe>;
+  appetizerCollection: AngularFirestoreCollection<Recipe>;
+  recipes: any;
+  appetizers: any;
+  dishes: any;
+
+  recipe: string;
+  ingredients: string;
+  preparation: string;
+  recipe_image: string;
+
+  constructor(private afs: FirestoreService, private categoryService: CategoryService, private db: AngularFireDatabase,
               public afAuth: AngularFireAuth, private event: EventBusService) {
     this.subscription = this.categoryService.getCategory().subscribe(category => {
       this.category = category;
-      console.log(category);
     });
   }
 
@@ -42,9 +53,11 @@ export class DashboardComponent implements OnInit {
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {
         this.user = this.afAuth.authState;
-
-        this.processData();
-        this.getRecipeIndex();
+        // this.processData();
+        // this.getRecipeIndex();
+        this.callRecipeData();
+        // this.callAppetizerData();
+        // this.callDishes();
       }
       if (!(auth && auth.uid)) {
         this.dishesObservable = null;
@@ -54,72 +67,130 @@ export class DashboardComponent implements OnInit {
 
     });
   }
-
-  sendCategoryIndex(dish, index) {
-    this.selectedFood = index;
-    if (dish === 'Appetizer') {
-      this.event.emit('changedCategoryIndex', {listPath: '/Appetizer'});
-      // this.sendAppetizers();
-    }
-    if (dish === 'Soup') {
-      this.event.emit('changedCategoryIndex', {listPath: '/Soup'});
-    }
-    if (dish === 'MainDish') {
-      this.event.emit('changedCategoryIndex', {listPath: '/MainDish'});
-    }
-    if (dish === 'Cake') {
-      // this.sendCakes();
-      this.event.emit('changedCategoryIndex', {listPath: '/Cake'});
-    }
-    if (dish === 'Dessert') {
-      // this.sendDesserts();
-      this.event.emit('changedCategoryIndex', {listPath: '/Dessert'});
-    }
-    if (dish === 'WarmDrink') {
-      this.event.emit('changedCategoryIndex', {listPath: '/WarmDrink'});
-    }
-    if (dish === 'ColdDrink') {
-      this.event.emit('changedCategoryIndex', {listPath: '/ColdDrink'});
-    }
-    if (dish === 'AlcoholFreeCocktail') {
-      this.event.emit('changedCategoryIndex', {listPath: '/AlcoholFreeCocktail'});
-    }
-    if (dish === 'AlcoholCocktail') {
-      this.event.emit('changedCategoryIndex', {listPath: '/AlcoholCocktail'});
-    }
-  }
-
-  chooseDish(recipeName){
-    this.dishEvent.emit(recipeName);
-    console.log('chooseDish: ' + this.dishEvent);
-  }
-
-  private processData(): void {
-    this.event.observe('changedCategory').subscribe((value) => {
-      // console.log(value.listPath);
-      this.db.object(value.listPath).valueChanges().subscribe(values => {
-        console.log(values);
-        this.food = Object.keys(values);
-        this.food.sort(function (a, b) {
-          return (values[a].__meta.order > values[b].__meta.order) ? 1 : ((values[a].__meta.order > values[b].__meta.order) ? -1 : 0);
+  callAppetizerData() {
+    this.appetizerCollection = this.afs.findAppetizerCollection();
+    this.appetizers = this.appetizerCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Recipe;
+          const id = a.payload.doc.id;
+          return { id, data};
         });
-
-        // console.log(Object.keys(values));
       });
-    });
   }
-  private getRecipeIndex(): void {
-    this.event.observe('changedCategoryIndex').subscribe((value) => {
-        this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
-          this.recipeIndex = Object.keys(recipes);
-          console.log(this.recipeIndex);
+  callRecipeData() {
+    this.recipeCollection = this.afs.findRecipeCollection();
+    this.recipes = this.recipeCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Recipe;
+          const id = a.payload.doc.id;
+          return { id, data};
         });
-    });
-    this.event.observe('changedCategoryIndex').subscribe((value) => {
-      this.db.object('/Drinks' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
-        this.recipeIndex = Object.keys(recipes);
-        console.log(this.recipeIndex);
       });
-    });
   }
+  callDishes(recipeId) {
+    this.recipeCollection = this.afs.findDishes(recipeId);
+    this.dishes = this.recipeCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Recipe;
+          const id = a.payload.doc.id;
+          return { id, data};
+        });
+      });
+  }
+
+  addRecipe() {
+    this.afs.addRecipe();
+  }
+  getRecipe(recipeId) {
+    this.afs.getRecipe(recipeId);
+  }
+  deleteRecipe(recipeId) {
+    this.afs.deleteRecipe(recipeId);
+  }
+
+
+  addAppetizer() {
+    this.afs.addAppetizer();
+  }
+  getAppetizers(recipeId) {
+    this.afs.getAppetizers(recipeId);
+  }
+  deleteAppetizer(recipeId) {
+    this.afs.deleteAppetizer(recipeId);
+  }
+  getDishes(recipeId) {
+    this.afs.getDishes(recipeId);
+  }
+
+  // sendCategoryIndex(dish, index) {
+  //   this.selectedFood = index;
+  //   if (dish === 'Appetizer') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/Appetizer'});
+  //     // this.sendAppetizers();
+  //   }
+  //   if (dish === 'Soup') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/Soup'});
+  //   }
+  //   if (dish === 'MainDish') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/MainDish'});
+  //   }
+  //   if (dish === 'Cake') {
+  //     // this.sendCakes();
+  //     this.event.emit('changedCategoryIndex', {listPath: '/Cake'});
+  //   }
+  //   if (dish === 'Dessert') {
+  //     // this.sendDesserts();
+  //     this.event.emit('changedCategoryIndex', {listPath: '/Dessert'});
+  //   }
+  //   if (dish === 'WarmDrink') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/WarmDrink'});
+  //   }
+  //   if (dish === 'ColdDrink') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/ColdDrink'});
+  //   }
+  //   if (dish === 'AlcoholFreeCocktail') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/AlcoholFreeCocktail'});
+  //   }
+  //   if (dish === 'AlcoholCocktail') {
+  //     this.event.emit('changedCategoryIndex', {listPath: '/AlcoholCocktail'});
+  //   }
+  // }
+  //
+  // chooseDish(recipeName){
+  //   this.dishEvent.emit(recipeName);
+  //   // console.log('chooseDish: ' + this.dishEvent);
+  // }
+  //
+  // private processData(): void {
+  //   this.event.observe('changedCategory').subscribe((value) => {
+  //     // console.log(value.listPath);
+  //     this.db.object(value.listPath).valueChanges().subscribe(values => {
+  //       // console.log(values);
+  //       this.food = Object.keys(values);
+  //       this.food.sort(function (a, b) {
+  //         return (values[a].__meta.order > values[b].__meta.order) ? 1 : ((values[a].__meta.order > values[b].__meta.order) ? -1 : 0);
+  //       });
+  //
+  //       // console.log(Object.keys(values));
+  //     });
+  //   });
+  // }
+  //
+  // private getRecipeIndex(): void {
+  //   this.event.observe('changedCategoryIndex').subscribe((value) => {
+  //       this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+  //         this.recipeIndex = Object.keys(recipes);
+  //         // console.log(this.recipeIndex);
+  //       });
+  //   });
+  //   // this.event.observe('changedCategoryIndex').subscribe((value) => {
+  //   //   this.db.object('/Drinks' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+  //   //     this.recipeIndex = Object.keys(recipes);
+  //   //     // console.log(this.recipeIndex);
+  //   //   });
+  //   // });
+  // }
 }

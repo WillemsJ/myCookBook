@@ -1,18 +1,72 @@
+<!--<div *ngIf="(user | async)?.uid">-->
+  <!--<p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>-->
+  <!--<div *ngFor="let dish of food; let ind = index">-->
+    <!--<ngb-alert type="info" [dismissible]="false">-->
+      <!--<div  class="dropdown" dropdown>-->
+        <!--<button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="sendCategoryIndex(dish, ind)"-->
+                <!--type="button" mdbRippleRadius>-->
+          <!--{{dish}}-->
+        <!--</button>-->
+        <!--<div [hidden]="selectedFood !== ind" class="dropdown-menu dropdown-warning">-->
+          <!--<ng-template ngFor let-recipe [ngForOf]="recipeIndex">-->
+            <!--<a class="dropdown-item" (click)="chooseDish(recipe)">{{recipe}}</a>-->
+          <!--</ng-template>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</ngb-alert>-->
+  <!--</div>-->
+<!--</div>-->
+
 <div *ngIf="(user | async)?.uid">
   <p *ngIf="category" class="alert alert-success">{{category.dish}} {{category.drink}}</p>
-  <div *ngFor="let dish of food; let ind = index">
+  <div *ngFor="let recipe of recipes | async">
     <ngb-alert type="info" [dismissible]="false">
       <div  class="dropdown" dropdown>
-        <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="sendCategoryIndex(dish, ind)"
+        <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="getRecipe(recipe.id)"
                 type="button" mdbRippleRadius>
-          {{dish}}
+          <strong>{{recipe.data.recipe}} (<a href="#" (click)="deleteRecipe(recipe.id)">delete</a>)</strong>
         </button>
-        <div [hidden]="selectedFood !== ind" class="dropdown-menu dropdown-warning">
-          <ng-template ngFor let-recipe [ngForOf]="recipeIndex">
-            <a class="dropdown-item" (click)="chooseDish(recipe)">{{recipe}}</a>
-          </ng-template>
-        </div>
+        <!--<div [hidden]="selectedFood !== ind" class="dropdown-menu dropdown-warning">-->
+          <!--<ng-template ngFor let-recipe [ngForOf]="recipeIndex">-->
+            <!--<a class="dropdown-item" (click)="chooseDish(recipe)">{{recipe}}</a>-->
+          <!--</ng-template>-->
+        <!--</div>-->
       </div>
     </ngb-alert>
   </div>
+
+  <div *ngFor="let appetizer of appetizers | async">
+    <ngb-alert type="info" [dismissible]="false">
+      <div  class="dropdown" dropdown>
+        <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="getRecipe(appetizer.id)"
+                type="button" mdbRippleRadius>
+          <strong>{{appetizer.data.recipe}} (<a href="#" (click)="deleteAppetizer(appetizer.id)">delete</a>)</strong>
+        </button>
+        <!--<div [hidden]="selectedFood !== ind" class="dropdown-menu dropdown-warning">-->
+        <!--<ng-template ngFor let-recipe [ngForOf]="recipeIndex">-->
+        <!--<a class="dropdown-item" (click)="chooseDish(recipe)">{{recipe}}</a>-->
+        <!--</ng-template>-->
+        <!--</div>-->
+      </div>
+    </ngb-alert>
+  </div>
+
+  <div *ngFor="let dish of dishes | async">
+    <ngb-alert type="info" [dismissible]="false">
+      <div  class="dropdown" dropdown>
+        <button dropdownToggle class="btn btn-warning dropdown-toggle waves-light" (click)="getDishes(dish.id)"
+                type="button" mdbRippleRadius>
+          <strong>{{dish.data.recipe}}
+            <!--(<a href="#" (click)="deleteAppetizer(appetizer.id)">delete</a>)--></strong>
+        </button>
+        <!--<div [hidden]="selectedFood !== ind" class="dropdown-menu dropdown-warning">-->
+        <!--<ng-template ngFor let-recipe [ngForOf]="recipeIndex">-->
+        <!--<a class="dropdown-item" (click)="chooseDish(recipe)">{{recipe}}</a>-->
+        <!--</ng-template>-->
+        <!--</div>-->
+      </div>
+    </ngb-alert>
+  </div>
+
 </div>
+

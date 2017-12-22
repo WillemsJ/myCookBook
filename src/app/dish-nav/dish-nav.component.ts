@@ -51,6 +51,8 @@ export class DishNavComponent implements OnInit {
     });
   }
 
+
+
   changeEmail(ev) {
     this.email = ev.target.value;
   }

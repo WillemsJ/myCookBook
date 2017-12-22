@@ -11,7 +11,7 @@ export class AppComponent {
 
   dishType: string;
 
-  protected static appcomp: AppComponent;
+  static appcomp: AppComponent;
 
   title = 'My Cookbook';
 
@@ -22,7 +22,7 @@ export class AppComponent {
     return this.appcomp;
   }
 
-  dishEvent(dishType){
+  dishEvent(dishType) {
     this.dishType = dishType;
   }
 

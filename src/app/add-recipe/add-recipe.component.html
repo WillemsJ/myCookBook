@@ -1,0 +1,30 @@
+<p>{{recipeForm.value| json }}</p>
+<form [formGroup]="recipeForm" >
+  <div class="form-group">
+    <label class="recipe">newRecipe:
+      <input     type="text" formControlName="F_recipe"  placeholder="Recipe.."/>
+      <textarea  type="text" formControlName="F_ingredients" placeholder="Ingredients.."></textarea>
+      <textarea  type="text" formControlName="F_preparation" placeholder="Preparation.."></textarea>
+      <textarea  type="text" formControlName="F_recipe_image" placeholder="Image.."></textarea>
+    </label>
+  </div>
+</form>
+<input type="submit" value="Add a recipe" (click)="addRecipe()"/>
+
+<ul *ngFor="let recipe of recipes | async">
+  <li (click)="getRecipe(recipe.id)">
+    <strong>{{recipe.data.recipe}} (<a href="#" (click)="deleteRecipe(recipe.id)">delete</a>)</strong>
+    <br>
+    Ingredients: {{recipe.data.ingredients}}
+    <br>
+    Preparation: {{recipe.data.preparation}}
+    <br>
+    Image: {{recipe.data.recipe_image}}<br>
+  </li>
+</ul>
+
+<h1>A specific recipe:</h1>
+<h3>{{(recipeObservable | async)?.recipe}}</h3>
+<p>{{(recipeObservable | async)?.ingredients}}</p>
+<p>{{(recipeObservable | async)?.preparation}}</p>
+<p>{{(recipeObservable | async)?.recipe_image}}</p>
