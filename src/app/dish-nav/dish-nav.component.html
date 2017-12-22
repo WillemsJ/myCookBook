@@ -44,15 +44,5 @@
         </a>
       </li>
     </ul>
-    <form class="form-inline  waves-light" mdbRippleRadius *ngIf="(user | async)?.uid">
-      <app-dish-search></app-dish-search>
-      <!--<ul class="search-result">-->
-        <!--<li *ngFor="let dish of dishes | async">-->
-          <!--<a routerLink="/detail/{{dish.id}}">-->
-            <!--{{dish.name}}-->
-          <!--</a>-->
-        <!--</li>-->
-      <!--</ul>-->
-    </form>
   </links>
 </mdb-navbar>

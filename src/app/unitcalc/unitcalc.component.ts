@@ -33,7 +33,7 @@ export class UnitcalcComponent implements OnInit {
     { name: 'Honey, Molasses, Syrup' }
   ];
 
-  cupWarning: string = 'Only or calculating from CUPS to other units. \n' +
+  cupWarning: string = 'Only for calculating from CUPS or tablespoons to other units. \n' +
     'Choose your desired ingredient:';
   spoonWarning: string = 'Only for calculating from tablespoons to other units. \n' +
     'Choose your desired ingredient';

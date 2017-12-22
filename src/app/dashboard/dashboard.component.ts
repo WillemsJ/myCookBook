@@ -98,7 +98,7 @@ export class DashboardComponent implements OnInit {
     this.event.observe('changedCategory').subscribe((value) => {
       // console.log(value.listPath);
       this.db.object(value.listPath).valueChanges().subscribe(values => {
-        console.log(values);
+        // console.log(values);
         this.food = Object.keys(values);
         this.food.sort(function (a, b) {
           return (values[a].__meta.order > values[b].__meta.order) ? 1 : ((values[a].__meta.order > values[b].__meta.order) ? -1 : 0);
@@ -112,12 +112,14 @@ export class DashboardComponent implements OnInit {
   private getRecipeIndex(): void {
     this.event.observe('changedCategoryIndex').subscribe((value) => {
       this.db.object('/Dishes' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+        console.log(recipes);
         this.recipeIndex = Object.keys(recipes);
           // console.log(this.recipeIndex);
         });
     });
     this.event.observe('changedCategoryIndex').subscribe((value) => {
       this.db.object('/Drinks' + value.listPath + '/recipes').valueChanges().subscribe((recipes) => {
+        console.log(recipes);
         this.recipeIndex = Object.keys(recipes);
         console.log(this.recipeIndex);
       });

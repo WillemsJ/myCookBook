@@ -16,7 +16,6 @@ import { DishService } from "./service/dish.service";
 import { MessagesComponent } from './messages/messages.component';
 import {MessageService} from "./service/message.service";
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { DishSearchComponent } from './dish-search/dish-search.component';
 import { DishNavComponent } from './dish-nav/dish-nav.component';
 import { UnitcalcComponent } from './unitcalc/unitcalc.component';
 
@@ -36,7 +35,6 @@ import {UnitCalcService} from "./service/unit-calc.service";
     DishDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    DishSearchComponent,
     DishNavComponent,
     UnitcalcComponent
   ],
