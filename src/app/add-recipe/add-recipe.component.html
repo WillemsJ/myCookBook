@@ -1,30 +1,71 @@
-<p>{{recipeForm.value| json }}</p>
-<form [formGroup]="recipeForm" >
-  <div class="form-group">
-    <label class="recipe">newRecipe:
-      <input     type="text" formControlName="F_recipe"  placeholder="Recipe.."/>
-      <textarea  type="text" formControlName="F_ingredients" placeholder="Ingredients.."></textarea>
-      <textarea  type="text" formControlName="F_preparation" placeholder="Preparation.."></textarea>
-      <textarea  type="text" formControlName="F_recipe_image" placeholder="Image.."></textarea>
-    </label>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light orange lighten-1 sticky-top">
+  <links>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLink="/home" (click)="showContentView()" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
+<div class="new-recipe-container">
+  <div class="left-container">
+    <form [formGroup]="recipeForm" >
+      <div class="form-group">
+        <label class="recipe">
+          <input     type="text" formControlName="F_recipe"  placeholder="Recipe.."/>
+          <textarea  type="text" formControlName="F_ingredients" placeholder="Ingredients.."></textarea>
+          <textarea  type="text" formControlName="F_preparation" placeholder="Preparation.."></textarea>
+          <textarea  type="text" formControlName="F_recipe_image" placeholder="Image.."></textarea>
+          <label>Select Recipe category:
+            <select id="selected">
+              <option>Appetizer</option>
+              <option>Soup</option>
+              <option>Main Dish</option>
+              <option>Cake</option>
+              <option>Dessert</option>
+              <option>Warm Drink</option>
+              <option>Cold Drink</option>
+              <option>Alcohol-free Cocktail</option>
+              <option>Alcohol Cocktail</option>
+            </select>
+          </label>
+        </label>
+      </div>
+    </form>
   </div>
-</form>
-<input type="submit" value="Add a recipe" (click)="addRecipe()"/>
+  <div class="right-container">
+    <h1>A specific recipe:</h1>
+    <h3>{{(recipeObservable | async)?.recipe}}</h3>
+    <p>{{(recipeObservable | async)?.ingredients}}</p>
+    <p>{{(recipeObservable | async)?.preparation}}</p>
+    <p>{{(recipeObservable | async)?.recipe_image}}</p>
+  </div>
+  <input type="submit" value="Add a new recipe"  (click)="addRecipe()"/>
 
-<ul *ngFor="let recipe of recipes | async">
-  <li (click)="getRecipe(recipe.id)">
-    <strong>{{recipe.data.recipe}} (<a href="#" (click)="deleteRecipe(recipe.id)">delete</a>)</strong>
-    <br>
-    Ingredients: {{recipe.data.ingredients}}
-    <br>
-    Preparation: {{recipe.data.preparation}}
-    <br>
-    Image: {{recipe.data.recipe_image}}<br>
-  </li>
-</ul>
-
-<h1>A specific recipe:</h1>
-<h3>{{(recipeObservable | async)?.recipe}}</h3>
-<p>{{(recipeObservable | async)?.ingredients}}</p>
-<p>{{(recipeObservable | async)?.preparation}}</p>
-<p>{{(recipeObservable | async)?.recipe_image}}</p>
+  <div class="middle">
+    <ul *ngFor="let dessert of desserts | async" class="orange">
+      <li class="middleContent" routerLink="/addrecipe" (click)="getDessert(dessert.id)">
+        <h4><strong>{{dessert.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)">delete</a>)</strong></h4>
+        <!--<p>Ingredients: {{dessert.data.ingredients}}</p>-->
+        <!--<p>Preparation: {{dessert.data.preparation}}</p>-->
+        <!--<p>Image: {{dessert.data.recipe_image}}<br></p>-->
+      </li>
+    </ul>
+    <ul *ngFor="let maindish of maindishes | async" class="orange">
+      <li class="middleContent" routerLink="/addrecipe" (click)="getMainDish(maindish.id)">
+        <h4><strong>{{maindish.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)">delete</a>)</strong></h4>
+        <!--<p>Ingredients: {{maindish.data.ingredients}}</p>-->
+        <!--<p>Preparation: {{maindish.data.preparation}}</p>-->
+        <!--<p>Image: {{maindish.data.recipe_image}}<br></p>-->
+      </li>
+    </ul>
+    <ul *ngFor="let warmdrink of warmdrinks | async" class="orange">
+      <li class="middleContent" routerLink="/addrecipe" (click)="getWarmDrink(warmdrink.id)">
+        <h4><strong>{{warmdrink.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)">delete</a>)</strong></h4>
+        <!--<p>Ingredients: {{warmdrink.data.ingredients}}</p>-->
+        <!--<p>Preparation: {{warmdrink.data.preparation}}</p>-->
+        <!--<p>Image: {{warmdrink.data.recipe_image}}<br></p>-->
+      </li>
+    </ul>
+  </div>
+</div>

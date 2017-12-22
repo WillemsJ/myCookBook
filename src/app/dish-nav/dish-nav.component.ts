@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {AngularFireAuth} from "angularfire2/auth";
@@ -18,6 +18,8 @@ import { EventBusService } from '../service/event-bus.service';
 export class DishNavComponent implements OnInit {
   protected static dishNavComp: DishNavComponent;
 
+  ss;
+
   appComp = AppComponent.getInstance();
   public selectedCategory = '';
 
@@ -31,6 +33,7 @@ export class DishNavComponent implements OnInit {
   password = 'password';
   constructor(private categoryService: CategoryService, private db: AngularFireDatabase,
               public afAuth: AngularFireAuth, private event: EventBusService) {
+    this.ss = event;
   }
 
   static getDishNavMethods(): DishNavComponent {
@@ -41,6 +44,7 @@ export class DishNavComponent implements OnInit {
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {
         this.user = this.afAuth.authState;
+        this.ss = event;
       }
       if (!(auth && auth.uid)) {
         this.dishesObservable = null;
@@ -50,8 +54,6 @@ export class DishNavComponent implements OnInit {
 
     });
   }
-
-
 
   changeEmail(ev) {
     this.email = ev.target.value;
@@ -72,13 +74,17 @@ export class DishNavComponent implements OnInit {
     this.userPromise = this.afAuth.auth.signOut();
   }
 
-  selectCategoryHandler(ev: any) {
-    this.selectedCategory = ev.target.value;
-  }
+  // selectCategoryHandler(ev: any) {
+  //   this.selectedCategory = ev.target.value;
+  // }
   sendDishesCategory(category: string) {
     this.event.emit('changedCategory', { listPath: '/Dishes' });
   }
   sendDrinksCategory(category: string) {
     this.event.emit('changedCategory', { listPath: '/Drinks' });
+  }
+
+  hideContentView() {
+    this.event.hide();
   }
 }

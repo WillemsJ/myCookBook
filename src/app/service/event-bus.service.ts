@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/filter';
@@ -11,7 +11,7 @@ interface EventBusArgs {
 
 @Injectable()
 export class EventBusService {
-
+@Output() fire: EventEmitter<any> = new EventEmitter();
   private _messages$ = new Subject<EventBusArgs>();
 
   constructor() {}
@@ -24,6 +24,12 @@ export class EventBusService {
     return this._messages$
       .filter(args => args.type === eventType)
       .map(args => args.data);
+  }
+  show() {
+    this.fire.emit(false);
+  }
+  hide() {
+    this.fire.emit(true);
   }
 
 }

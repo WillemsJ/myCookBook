@@ -29,6 +29,7 @@ import { EventBusService} from './service/event-bus.service';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { FirestoreService } from './service/firestore.service';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
+import { ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { AddRecipeComponent } from './add-recipe/add-recipe.component';
       InMemoryDataService, {dataEncapsulation: false}
     ),
     FlexLayoutModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [MessageService, CategoryService, EventBusService, FirestoreService],
   bootstrap: [AppComponent],

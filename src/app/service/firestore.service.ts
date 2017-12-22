@@ -14,51 +14,36 @@ export class FirestoreService {
   preparation: string;
   recipe_image: string;
 
-  recipeDoc: AngularFirestoreDocument<Recipe>;
-  recipeObservable: Observable<Recipe>;
-
-
   constructor(private afs: AngularFirestore) { }
 
-  findAppetizerCollection() {
-    return this.appetizerCollection = this.afs.collection('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/');
+  findDessertCollection() {
+    return this.recipeCollection = this.afs.collection('Dessert');
   }
-  findRecipeCollection() {
-    return this.recipeCollection = this.afs.collection('recipes');
-  }
-  findDishes(recipeId) {
-    return this.recipeCollection = this.afs.collection('Dishes/' + recipeId);
+  findWarmDrinkCollection() {
+    return this.recipeCollection = this.afs.collection('Warm Drink');
+
   }
 
-  addRecipe() {
-    this.afs.collection('recipes/').add({'recipe': this.recipe, 'ingredients': this.ingredients,
-      'preparation': this.preparation, 'image': this.recipe_image});
+  getDessert(recipeId): any {
+    return this.afs.doc('Dessert/' + recipeId);
   }
-  getRecipe(recipeId) {
-    this.recipeDoc = this.afs.doc('recipes/' + recipeId);
-    this.recipeObservable = this.recipeDoc.valueChanges();
-  }
-  deleteRecipe(recipeId) {
-    this.afs.doc('recipes/' + recipeId).delete();
+  deleteDessert(recipeId) {
+    return this.afs.doc('Dessert/' + recipeId).delete();
   }
 
-
-  addAppetizer() {
-    this.afs.collection('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/').add({'recipe': this.recipe, 'ingredients': this.ingredients,
-      'preparation': this.preparation, 'image': this.recipe_image});
+  findMainDishCollection() {
+    return this.recipeCollection = this.afs.collection('Main Dish');
   }
-  getAppetizers(recipeId) {
-    this.afs.doc('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/' + recipeId);
-    this.recipeObservable = this.recipeDoc.valueChanges();
+  getMainDish(recipeId): any {
+    return this.afs.doc('Main Dish/' + recipeId);
   }
-  deleteAppetizer(recipeId) {
-    this.afs.doc('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/' + recipeId).delete();
+  deleteMainDish(recipeId) {
+    return this.afs.doc('Main Dish/' + recipeId).delete();
   }
-
-
-  getDishes(recipeId) {
-    this.afs.doc('Dishes/' + recipeId + '/Appetizer/');
-    // this.afs.collection('Dishes/' + recipeId);
-    this.recipeObservable = this.recipeDoc.valueChanges();
+  getWarmDrink(recipeId): any {
+    return this.afs.doc('Warm Drink/' + recipeId);
+  }
+  deleteWarmDrink(recipeId) {
+    return this.afs.doc('Warm Drink/' + recipeId).delete();
   }
 }

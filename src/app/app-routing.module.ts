@@ -4,6 +4,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {DishDetailComponent} from "./dish-detail/dish-detail.component";
 import {DishNavComponent} from "./dish-nav/dish-nav.component";
+import { AddRecipeComponent } from './add-recipe/add-recipe.component';
 
 // const routes: Routes = [
 //   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -15,10 +16,11 @@ import {DishNavComponent} from "./dish-nav/dish-nav.component";
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: DishNavComponent },
-  { path: 'recipes', component:DishNavComponent, children: [
+  { path: 'recipes', component: DishNavComponent, children: [
       { path: 'recipesList', component: DashboardComponent, outlet: 'list' },
       { path: ':id', component: DishDetailComponent, outlet: 'detail' }
     ] },
+  { path: 'addrecipe', component: AddRecipeComponent}
 ];
 
 @NgModule({

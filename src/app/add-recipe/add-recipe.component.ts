@@ -4,6 +4,7 @@ import { Recipe } from '../cookbookRecipes/recipe';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import { FirestoreService } from '../service/firestore.service';
+import { EventBusService } from '../service/event-bus.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -12,12 +13,13 @@ import { FirestoreService } from '../service/firestore.service';
 })
 export class AddRecipeComponent implements OnInit {
 
+  fire;
   recipeForm: FormGroup;
 
   recipeCollection: AngularFirestoreCollection<Recipe>;
-  appetizerCollection: AngularFirestoreCollection<Recipe>;
-  recipes: any;
-  appetizers: any;
+  desserts: any;
+  maindishes: any;
+  warmdrinks: any;
 
   recipe: string;
   ingredients: string;
@@ -27,17 +29,24 @@ export class AddRecipeComponent implements OnInit {
   recipeDoc: AngularFirestoreDocument<Recipe>;
   recipeObservable: Observable<Recipe>;
 
-  constructor(private formbuilder: FormBuilder, private afs: AngularFirestore, private firestoreDb: FirestoreService) { }
+
+
+  constructor( private event: EventBusService,
+               private formbuilder: FormBuilder,
+               private afs: AngularFirestore, private firestore: FirestoreService) {
+    this.fire = event;
+  }
 
   ngOnInit() {
-    this.callRecipeData();
-    this.callAppetizerData();
+    this.callDessertData();
+    this.callMainDishData();
+    this.callWarmDrinkData();
     this.createForm();
+    this.fire = event;
   }
-
-  callAppetizerData() {
-    this.appetizerCollection = this.firestoreDb.findAppetizerCollection();
-    this.appetizers = this.appetizerCollection.snapshotChanges()
+  callDessertData() {
+    this.recipeCollection = this.firestore.findDessertCollection();
+    this.desserts = this.recipeCollection.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as Recipe;
@@ -46,9 +55,9 @@ export class AddRecipeComponent implements OnInit {
         });
       });
   }
-  callRecipeData() {
-    this.recipeCollection = this.firestoreDb.findRecipeCollection();
-    this.recipes = this.recipeCollection.snapshotChanges()
+  callMainDishData() {
+    this.recipeCollection = this.firestore.findMainDishCollection();
+    this.maindishes = this.recipeCollection.snapshotChanges()
       .map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as Recipe;
@@ -57,37 +66,55 @@ export class AddRecipeComponent implements OnInit {
         });
       });
   }
-
-  //
+  callWarmDrinkData() {
+    this.recipeCollection = this.firestore.findWarmDrinkCollection();
+    this.warmdrinks = this.recipeCollection.snapshotChanges()
+      .map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Recipe;
+          const id = a.payload.doc.id;
+          return { id, data};
+        });
+      });
+  }
 
   addRecipe() {
-    this.afs.collection('recipes/')
-      .add({'recipe': this.recipeForm.getRawValue().F_ingredients,
+    const eID = document.getElementById("selected");
+    const selectedItem = eID.options[eID.selectedIndex].text;
+    console.log(selectedItem + '/');
+
+    this.afs.collection( '' + selectedItem)
+      .add({'recipe': this.recipeForm.getRawValue().F_recipe,
         'ingredients': this.recipeForm.getRawValue().F_ingredients,
         'preparation': this.recipeForm.getRawValue().F_preparation,
         'recipe_image': this.recipeForm.getRawValue().F_recipe_image});
+    this.clearForm();
+  }
+  clearForm() {
     this.recipeForm.reset();
   }
-  getRecipe(recipeId) {
-    this.recipeDoc = this.afs.doc('recipes/' + recipeId);
-    this.recipeObservable = this.recipeDoc.valueChanges();
-  }
-  deleteRecipe(recipeId) {
-    return this.afs.doc('recipes/' + recipeId).delete();
-  }
 
 
-  addAppetizer() {
-    this.afs.collection('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/')
-      .add({'recipe': this.recipe, 'ingredients': this.ingredients,
-        'preparation': this.preparation, 'recipe_image': this.recipe_image});
+  getDessert(recipeId) {
+    this.recipeDoc = this.firestore.getDessert(recipeId);
+    return this.recipeObservable = this.recipeDoc.valueChanges();
   }
-  getAppetizers(recipeId) {
-    this.afs.doc('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/' + recipeId);
-    this.recipeObservable = this.recipeDoc.valueChanges();
+  deleteDessert(recipeId) {
+    return this.firestore.deleteDessert(recipeId);
   }
-  deleteAppetizer(recipeId) {
-    return this.afs.doc('Dishes/f2E8O2qf6y0hQwnFVQ2s/Appetizer/' + recipeId).delete();
+  getMainDish(recipeId) {
+    this.recipeDoc = this.firestore.getMainDish(recipeId);
+    return this.recipeObservable = this.recipeDoc.valueChanges();
+  }
+  deleteMainDish(recipeId) {
+    return this.firestore.deleteMainDish(recipeId);
+  }
+  getWarmDrink(recipeId) {
+    this.recipeDoc = this.firestore.getWarmDrink(recipeId);
+    return this.recipeObservable = this.recipeDoc.valueChanges();
+  }
+  deleteWarmDrink(recipeId) {
+    return this.firestore.deleteWarmDrink(recipeId);
   }
 
   private createForm() {
@@ -97,5 +124,9 @@ export class AddRecipeComponent implements OnInit {
       F_preparation: new FormControl('', [Validators.required]),
       F_recipe_image: new FormControl('')
     });
+  }
+
+  showContentView() {
+    this.event.show();
   }
 }
