@@ -44,27 +44,42 @@
 
   <div class="middle">
     <ul *ngFor="let dessert of desserts | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe" (click)="getDessert(dessert.id)">
-        <h4><strong>{{dessert.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)">delete</a>)</strong></h4>
+      <li class="middleContent" routerLink="/addrecipe" >
+        <h4><strong>{{dessert.data.recipe}}
+          <span class="edit">
+            <a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)"><i class="fa fa-trash"></i></a>
+            <a (click)="getDessert(dessert.id)" (click)="updateRecipe($event, dessert.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
         <!--<p>Ingredients: {{dessert.data.ingredients}}</p>-->
         <!--<p>Preparation: {{dessert.data.preparation}}</p>-->
         <!--<p>Image: {{dessert.data.recipe_image}}<br></p>-->
       </li>
     </ul>
     <ul *ngFor="let maindish of maindishes | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe" (click)="getMainDish(maindish.id)">
-        <h4><strong>{{maindish.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)">delete</a>)</strong></h4>
+      <li class="middleContent" routerLink="/addrecipe">
+        <h4><strong>{{maindish.data.recipe}}
+          <span class="edit">
+            <a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)"><i class="fa fa-trash"></i></a>
+            <a (click)="getMainDish(maindish.id)" (click)="updateRecipe($event, maindish.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
         <!--<p>Ingredients: {{maindish.data.ingredients}}</p>-->
         <!--<p>Preparation: {{maindish.data.preparation}}</p>-->
         <!--<p>Image: {{maindish.data.recipe_image}}<br></p>-->
+        <div *ngIf="editState && recipeToEdit.id == maindish.id">
+          test
+        </div>
       </li>
     </ul>
     <ul *ngFor="let warmdrink of warmdrinks | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe" (click)="getWarmDrink(warmdrink.id)">
-        <h4><strong>{{warmdrink.data.recipe}}  (<a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)">delete</a>)</strong></h4>
+      <li class="middleContent" routerLink="/addrecipe" >
+        <h4><strong>{{warmdrink.data.recipe}}
+          <span class="edit">
+            <a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)"><i class="fa fa-trash"></i></a>
+            <a (click)="getWarmDrink(warmdrink.id)" (click)="updateRecipe($event, warmdrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
         <!--<p>Ingredients: {{warmdrink.data.ingredients}}</p>-->
         <!--<p>Preparation: {{warmdrink.data.preparation}}</p>-->
         <!--<p>Image: {{warmdrink.data.recipe_image}}<br></p>-->
+        <div *ngIf="editState && recipeToEdit.id == warmdrink.id">
+          test
+        </div>
       </li>
     </ul>
   </div>

@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs/Observable';
 import { FirestoreService } from '../service/firestore.service';
 import { EventBusService } from '../service/event-bus.service';
+import { RecipeId} from '../cookbookRecipes/recipe-id';
 
 @Component({
   selector: 'app-add-recipe',
@@ -26,6 +27,10 @@ export class AddRecipeComponent implements OnInit {
   preparation: string;
   recipe_image: string;
 
+  editState = false;
+  recipeToEdit: RecipeId;
+
+
   recipeDoc: AngularFirestoreDocument<Recipe>;
   recipeObservable: Observable<Recipe>;
 
@@ -33,11 +38,12 @@ export class AddRecipeComponent implements OnInit {
 
   constructor( private event: EventBusService,
                private formbuilder: FormBuilder,
-               private afs: AngularFirestore, private firestore: FirestoreService) {
+               private afs: AngularFirestore, private firestore: FirestoreService, private viewList: EventBusService) {
     this.fire = event;
   }
 
   ngOnInit() {
+    this.viewList.hide();
     this.callDessertData();
     this.callMainDishData();
     this.callWarmDrinkData();
@@ -90,6 +96,12 @@ export class AddRecipeComponent implements OnInit {
         'recipe_image': this.recipeForm.getRawValue().F_recipe_image});
     this.clearForm();
   }
+
+  updateRecipe(event, recipeId) {
+    this.editState = true;
+    this.recipeToEdit = recipeId;
+  }
+
   clearForm() {
     this.recipeForm.reset();
   }

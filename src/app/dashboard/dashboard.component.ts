@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   subscription: Subscription;
   public selectedFood: number;
 
+  viewList: boolean;
 
   recipeCollection: AngularFirestoreCollection<Recipe>;
   appetizerCollection: AngularFirestoreCollection<Recipe>;
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit() {
+    this.viewList = true;
     this.afAuth.authState.subscribe(auth => {
       if (auth && auth.uid) {
         this.user = this.afAuth.authState;

@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
-import { Observable } from 'rxjs/Observable';
 import { Recipe} from '../cookbookRecipes/recipe';
 
 
 @Injectable()
 export class FirestoreService {
   recipeCollection: AngularFirestoreCollection<Recipe>;
-  appetizerCollection: AngularFirestoreCollection<Recipe>;
   recipes: any;
   recipe: string;
   ingredients: string;
@@ -19,11 +17,6 @@ export class FirestoreService {
   findDessertCollection() {
     return this.recipeCollection = this.afs.collection('Dessert');
   }
-  findWarmDrinkCollection() {
-    return this.recipeCollection = this.afs.collection('Warm Drink');
-
-  }
-
   getDessert(recipeId): any {
     return this.afs.doc('Dessert/' + recipeId);
   }
@@ -39,6 +32,10 @@ export class FirestoreService {
   }
   deleteMainDish(recipeId) {
     return this.afs.doc('Main Dish/' + recipeId).delete();
+  }
+
+  findWarmDrinkCollection() {
+    return this.recipeCollection = this.afs.collection('Warm Drink');
   }
   getWarmDrink(recipeId): any {
     return this.afs.doc('Warm Drink/' + recipeId);

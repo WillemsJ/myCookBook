@@ -10,17 +10,11 @@ import { DishNavComponent} from './dish-nav/dish-nav.component';
 })
 
 export class AppComponent implements OnInit {
-
-  dishType: string;
-  viewList: Boolean;
-
   static appcomp: AppComponent;
-
+  dishType: string;
   title = 'My Cookbook';
 
-  constructor(ss: EventBusService) {
-    this.viewList = false;
-    this.ss = ss;
+  constructor(private viewList: EventBusService) {
   }
 
   ngOnInit() {
@@ -36,7 +30,8 @@ export class AppComponent implements OnInit {
     this.dishType = dishType;
   }
 
-
-
+  show() {
+    this.viewList.show();
+  }
 
 }
