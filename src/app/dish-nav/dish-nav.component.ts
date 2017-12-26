@@ -83,8 +83,4 @@ export class DishNavComponent implements OnInit {
   sendDrinksCategory(category: string) {
     this.event.emit('changedCategory', { listPath: '/Drinks' });
   }
-
-  hideContentView() {
-    this.event.hide();
-  }
 }

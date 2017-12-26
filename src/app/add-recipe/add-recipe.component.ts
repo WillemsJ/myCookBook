@@ -44,13 +44,14 @@ export class AddRecipeComponent implements OnInit {
 
   ngOnInit() {
     this.viewList.hide();
-    this.callDessertData();
-    this.callMainDishData();
-    this.callWarmDrinkData();
+    // this.callDessertData();
+    // this.callMainDishData();
+    // this.callWarmDrinkData();
     this.createForm();
     this.fire = event;
   }
   callDessertData() {
+    this.recipeCollection = null;
     this.recipeCollection = this.firestore.findDessertCollection();
     this.desserts = this.recipeCollection.snapshotChanges()
       .map(actions => {
@@ -100,6 +101,11 @@ export class AddRecipeComponent implements OnInit {
   updateRecipe(event, recipeId) {
     this.editState = true;
     this.recipeToEdit = recipeId;
+    // this.recipeCollection.doc(recipeId)
+    //   .update({'recipe': '', 'ingredients': '', 'preparation': '', 'recipe_image': ''})
+    //   .then(() => {
+    //     console.log('data updated');
+    //   });
   }
 
   clearForm() {

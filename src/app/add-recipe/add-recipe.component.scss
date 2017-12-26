@@ -72,7 +72,26 @@ select {
     margin-top: 0;
   }
 }
-
+.categoryButtonCollection {
+  width: 100%;
+  cursor:pointer;
+  font-weight:bold;
+  text-align: center;
+  button {
+    //width: 100%;
+    margin-top: 1em;
+    border: solid 1px #cccccc;
+    background: #ffa500;
+    border-radius: 5px;
+    padding: .5em;
+  }
+  button:active {
+    background-color: white;
+  }
+  button:visited {
+    color: white;
+  }
+}
 .orange {
   background: #ff8800;
   color: #ffffff;
@@ -87,6 +106,7 @@ select {
 .edit {
   float: right;
 }
+.fa fa-
 .new-recipe-container {
   width: 100%;
 }
@@ -118,7 +138,6 @@ input, textarea {
 @media (max-width: 600px) {
   .module {
     font-size: 10px;
-    //max-height: 75px;
   }
 }
 

@@ -41,14 +41,24 @@
     <p>{{(recipeObservable | async)?.recipe_image}}</p>
   </div>
   <input type="submit" value="Add a new recipe"  (click)="addRecipe()"/>
-
-  <div class="middle">
+  <br>
+  <div class="categoryButtonCollection">
+    <button><strong>Appetizer</strong></button>
+    <button><strong>Soup</strong></button>
+    <button (click)="callMainDishData()"><strong>Main Dish</strong></button>
+    <button><strong>Cake</strong></button>
+    <button (click)="callDessertData()"><strong>Dessert</strong></button>
+    <button (click)="callWarmDrinkData()"><strong>Warm Drink</strong></button>
+    <button><strong>Cold Drink</strong></button>
+    <button><strong>NA-Cocktail</strong></button>
+    <button><strong>Cocktail</strong></button>
+    <div class="middle">
     <ul *ngFor="let dessert of desserts | async" class="orange">
       <li class="middleContent" routerLink="/addrecipe" >
         <h4><strong>{{dessert.data.recipe}}
           <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)"><i class="fa fa-trash"></i></a>
-            <a (click)="getDessert(dessert.id)" (click)="updateRecipe($event, dessert.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
+            <a (click)="getDessert(dessert.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
         <!--<p>Ingredients: {{dessert.data.ingredients}}</p>-->
         <!--<p>Preparation: {{dessert.data.preparation}}</p>-->
         <!--<p>Image: {{dessert.data.recipe_image}}<br></p>-->
@@ -59,13 +69,15 @@
         <h4><strong>{{maindish.data.recipe}}
           <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)"><i class="fa fa-trash"></i></a>
-            <a (click)="getMainDish(maindish.id)" (click)="updateRecipe($event, maindish.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
+            <a (click)="getMainDish(maindish.id)"><i (click)="updateRecipe($event, maindish)" class="fa fa-pencil" ></i></a>
+          <div *ngIf="editState && recipeToEdit.id == maindish.id ">
+          <p>test</p>
+        </div>
+          </span></strong></h4>
         <!--<p>Ingredients: {{maindish.data.ingredients}}</p>-->
         <!--<p>Preparation: {{maindish.data.preparation}}</p>-->
         <!--<p>Image: {{maindish.data.recipe_image}}<br></p>-->
-        <div *ngIf="editState && recipeToEdit.id == maindish.id">
-          test
-        </div>
+
       </li>
     </ul>
     <ul *ngFor="let warmdrink of warmdrinks | async" class="orange">
@@ -73,14 +85,12 @@
         <h4><strong>{{warmdrink.data.recipe}}
           <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)"><i class="fa fa-trash"></i></a>
-            <a (click)="getWarmDrink(warmdrink.id)" (click)="updateRecipe($event, warmdrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
+            <a (click)="getWarmDrink(warmdrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
         <!--<p>Ingredients: {{warmdrink.data.ingredients}}</p>-->
         <!--<p>Preparation: {{warmdrink.data.preparation}}</p>-->
         <!--<p>Image: {{warmdrink.data.recipe_image}}<br></p>-->
-        <div *ngIf="editState && recipeToEdit.id == warmdrink.id">
-          test
-        </div>
       </li>
     </ul>
+  </div>
   </div>
 </div>

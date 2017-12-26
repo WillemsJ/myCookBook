@@ -1,5 +1,5 @@
 <mdb-navbar  SideClass="navbar navbar-expand-lg navbar-light orange lighten-1 sticky-top">
-  <logo><a class="navbar-brand" href="#">{{appComp.title}}</a></logo>
+  <logo class="navbar-brand"> {{appComp.title}}</logo>
   <links>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -39,7 +39,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-           routerLink="/recipes"
+        routerLink="/recipes"
         mdbRippleRadius (click)="sendDrinksCategory()" value="Drinks">
           <!--[routerLink]="['/recipes', {'list': ['recipesList'], 'detail': ['none']}]"-->
           Drinks
@@ -47,7 +47,7 @@
       </li>
       <li class="nav-item">
         <a class="nav-link waves-light" *ngIf="(user | async)?.uid"
-           routerLink="/addrecipe" mdbRippleRadius  (click)="hideContentView()" value="add_recipe">
+           routerLink="/addrecipe" mdbRippleRadius   value="add_recipe">
           Add new recipe
         </a>
       </li>

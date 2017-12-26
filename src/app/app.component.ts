@@ -1,7 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { EventBusService } from './service/event-bus.service';
-import { DishNavComponent} from './dish-nav/dish-nav.component';
-
 
 @Component({
   selector: 'app-root',
@@ -14,7 +11,7 @@ export class AppComponent implements OnInit {
   dishType: string;
   title = 'My Cookbook';
 
-  constructor(private viewList: EventBusService) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -29,9 +26,4 @@ export class AppComponent implements OnInit {
   dishEvent(dishType) {
     this.dishType = dishType;
   }
-
-  show() {
-    this.viewList.show();
-  }
-
 }
