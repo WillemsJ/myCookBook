@@ -1,3 +1,137 @@
+<!--<mdb-navbar SideClass="navbar navbar-expand-lg navbar-light orange lighten-1 sticky-top">-->
+  <!--<links>-->
+    <!--<ul class="navbar-nav mr-auto">-->
+      <!--<li class="nav-item">-->
+        <!--<a class="nav-link waves-light" routerLink="/home" (click)="showContentView()" mdbRippleRadius>Home<span class="sr-only">(current)</span></a>-->
+      <!--</li>-->
+    <!--</ul>-->
+  <!--</links>-->
+<!--</mdb-navbar>-->
+<!--<div class="new-recipe-container">-->
+  <!--<div class="left-container">-->
+    <!--<form [formGroup]="recipeForm" >-->
+      <!--<div class="form-group">-->
+        <!--<label class="recipe">-->
+          <!--<input     type="text" formControlName="F_recipe"  placeholder="Recipe.."/>-->
+          <!--<textarea  type="text" formControlName="F_ingredients" placeholder="Ingredients.."></textarea>-->
+          <!--<textarea  type="text" formControlName="F_preparation" placeholder="Preparation.."></textarea>-->
+          <!--<textarea  type="text" formControlName="F_recipe_image" placeholder="Image.."></textarea>-->
+          <!--<label>Select Recipe category:-->
+            <!--<select id="selected">-->
+              <!--<option>Appetizer</option>-->
+              <!--<option>Soup</option>-->
+              <!--<option>Main Dish</option>-->
+              <!--<option>Cake</option>-->
+              <!--<option>Dessert</option>-->
+              <!--<option>Warm Drink</option>-->
+              <!--<option>Cold Drink</option>-->
+              <!--<option>Alcohol-free Cocktail</option>-->
+              <!--<option>Alcohol Cocktail</option>-->
+            <!--</select>-->
+          <!--</label>-->
+        <!--</label>-->
+      <!--</div>-->
+    <!--</form>-->
+    <!--<input type="submit" value="Add a new recipe"  (click)="addRecipe()"/>-->
+  <!--</div>-->
+  <!--<div class="categoryButtonCollection">-->
+    <!--<button><strong>Appetizer</strong></button>-->
+    <!--<button><strong>Soup</strong></button>-->
+    <!--<button (click)="callMainDishData()"><strong>Main Dish</strong></button>-->
+    <!--<button><strong>Cake</strong></button>-->
+    <!--<button (click)="callDessertData()"><strong>Dessert</strong></button>-->
+    <!--<button (click)="callWarmDrinkData()"><strong>Warm Drink</strong></button>-->
+    <!--<button><strong>Cold Drink</strong></button>-->
+    <!--<button><strong>NA-Cocktail</strong></button>-->
+    <!--<button><strong>Cocktail</strong></button>-->
+  <!--</div>-->
+  <!--<div class="inner-container">-->
+    <!--<h3>{{(recipeObservable | async)?.recipe}}</h3>-->
+    <!--<p>{{(recipeObservable | async)?.ingredients}}</p>-->
+    <!--<p>{{(recipeObservable | async)?.preparation}}</p>-->
+    <!--<p>{{(recipeObservable | async)?.recipe_image}}</p>-->
+  <!--</div>-->
+  <!--<div class="middle">-->
+    <!--<ul *ngFor="let dessert of desserts | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{dessert.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(dessert.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let appetizer of appetizers | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{appetizer.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(appetizer.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(appetizer.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let soup of soups | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{soup.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(soup.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(soup.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let cake of cakes | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{cake.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(cake.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(cake.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let colddrink of colddrinks | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{colddrink.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(colddrink.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(colddrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let NAcocktail of nacocktails | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{NAcocktail.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(NAcocktail.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(NAcocktail.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let cocktail of cocktails | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{cocktail.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteDessert(cocktail.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getDessert(cocktail.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let maindish of maindishes | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe">-->
+<!--<h4><strong>{{maindish.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getMainDish(maindish.id)"><i (click)="updateRecipe($event, maindish)" class="fa fa-pencil" ></i></a>-->
+<!--<div *ngIf="editState && recipeToEdit.id == maindish.id">-->
+
+<!--</div>-->
+<!--</span></strong></h4>-->
+
+<!--</li>-->
+<!--</ul>-->
+<!--<ul *ngFor="let warmdrink of warmdrinks | async" class="orange">-->
+<!--<li class="middleContent" routerLink="/addrecipe" >-->
+<!--<h4><strong>{{warmdrink.data.recipe}}-->
+<!--<span class="edit">-->
+<!--<a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)"><i class="fa fa-trash"></i></a>-->
+<!--<a (click)="getWarmDrink(warmdrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>-->
+<!--</li>-->
+  <!--</ul>-->
+<!--</div>-->
+<!--</div>-->
+
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-light orange lighten-1 sticky-top">
   <links>
     <ul class="navbar-nav mr-auto">
@@ -8,7 +142,7 @@
   </links>
 </mdb-navbar>
 <div class="new-recipe-container">
-  <div class="left-container">
+  <div class="sub-container">
     <form [formGroup]="recipeForm" >
       <div class="form-group">
         <label class="recipe">
@@ -16,7 +150,7 @@
           <textarea  type="text" formControlName="F_ingredients" placeholder="Ingredients.."></textarea>
           <textarea  type="text" formControlName="F_preparation" placeholder="Preparation.."></textarea>
           <textarea  type="text" formControlName="F_recipe_image" placeholder="Image.."></textarea>
-          <label>Select Recipe category:
+          <label >Select Recipe category:
             <select id="selected">
               <option>Appetizer</option>
               <option>Soup</option>
@@ -32,65 +166,74 @@
         </label>
       </div>
     </form>
+    <input type="submit" value="Add a new recipe"  (click)="addRecipe()"/>
   </div>
-  <div class="right-container">
-    <h1>A specific recipe:</h1>
-    <h3>{{(recipeObservable | async)?.recipe}}</h3>
-    <p>{{(recipeObservable | async)?.ingredients}}</p>
-    <p>{{(recipeObservable | async)?.preparation}}</p>
-    <p>{{(recipeObservable | async)?.recipe_image}}</p>
+  <div *ngIf="recipeObservable" class="sub-container">
+    <form [formGroup]="recipeForm" >
+      <div class="form-group">
+        <label class="recipe">
+          <input     type="text" formControlName="F_recipe"  value="{{(recipeObservable | async)?.recipe}}"/>
+          <textarea  type="text" formControlName="F_ingredients" value="{{(recipeObservable | async)?.ingredients}}"></textarea>
+          <textarea  type="text" formControlName="F_preparation" value="{{(recipeObservable | async)?.preparation}}"></textarea>
+          <textarea  type="text" formControlName="F_recipe_image" value="{{(recipeObservable | async)?.recipe_image}}"></textarea>
+          <label>Recipe category:
+            <select>
+              <option>Appetizer</option>
+              <option>Soup</option>
+              <option>Main Dish</option>
+              <option>Cake</option>
+              <option>Dessert</option>
+              <option>Warm Drink</option>
+              <option>Cold Drink</option>
+              <option>Alcohol-free Cocktail</option>
+              <option>Alcohol Cocktail</option>
+            </select>
+          </label>
+        </label>
+      </div>
+    </form>
+    <input type="submit" value="Update recipe"  (click)="updateRecipe($event, recipeId)"/>
   </div>
-  <input type="submit" value="Add a new recipe"  (click)="addRecipe()"/>
   <br>
-  <div class="categoryButtonCollection">
-    <button><strong>Appetizer</strong></button>
-    <button><strong>Soup</strong></button>
-    <button (click)="callMainDishData()"><strong>Main Dish</strong></button>
-    <button><strong>Cake</strong></button>
-    <button (click)="callDessertData()"><strong>Dessert</strong></button>
-    <button (click)="callWarmDrinkData()"><strong>Warm Drink</strong></button>
-    <button><strong>Cold Drink</strong></button>
-    <button><strong>NA-Cocktail</strong></button>
-    <button><strong>Cocktail</strong></button>
-    <div class="middle">
-    <ul *ngFor="let dessert of desserts | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe" >
-        <h4><strong>{{dessert.data.recipe}}
-          <span class="edit">
+    <div class="categoryButtonCollection">
+      <button><strong>Appetizer</strong></button>
+      <button><strong>Soup</strong></button>
+      <button (click)="callMainDishData()"><strong>Main Dish</strong></button>
+      <button><strong>Cake</strong></button>
+      <button (click)="callDessertData()"><strong>Dessert</strong></button>
+      <button (click)="callWarmDrinkData()"><strong>Warm Drink</strong></button>
+      <button><strong>Cold Drink</strong></button>
+      <button><strong>NA-Cocktail</strong></button>
+      <button><strong>Cocktail</strong></button>
+      <div class="middle">
+        <ul *ngFor="let dessert of desserts | async" class="orange">
+          <li class="middleContent" routerLink="/addrecipe" >
+            <h4><strong>{{dessert.data.recipe}}
+              <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteDessert(dessert.id)"><i class="fa fa-trash"></i></a>
             <a (click)="getDessert(dessert.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
-        <!--<p>Ingredients: {{dessert.data.ingredients}}</p>-->
-        <!--<p>Preparation: {{dessert.data.preparation}}</p>-->
-        <!--<p>Image: {{dessert.data.recipe_image}}<br></p>-->
-      </li>
-    </ul>
-    <ul *ngFor="let maindish of maindishes | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe">
-        <h4><strong>{{maindish.data.recipe}}
-          <span class="edit">
+          </li>
+        </ul>
+        <ul *ngFor="let maindish of maindishes | async" class="orange">
+          <li class="middleContent" routerLink="/addrecipe">
+            <h4><strong>{{maindish.data.recipe}}
+              <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteMainDish(maindish.id)"><i class="fa fa-trash"></i></a>
             <a (click)="getMainDish(maindish.id)"><i (click)="updateRecipe($event, maindish)" class="fa fa-pencil" ></i></a>
           <div *ngIf="editState && recipeToEdit.id == maindish.id ">
           <p>test</p>
         </div>
           </span></strong></h4>
-        <!--<p>Ingredients: {{maindish.data.ingredients}}</p>-->
-        <!--<p>Preparation: {{maindish.data.preparation}}</p>-->
-        <!--<p>Image: {{maindish.data.recipe_image}}<br></p>-->
-
-      </li>
-    </ul>
-    <ul *ngFor="let warmdrink of warmdrinks | async" class="orange">
-      <li class="middleContent" routerLink="/addrecipe" >
-        <h4><strong>{{warmdrink.data.recipe}}
-          <span class="edit">
+          </li>
+        </ul>
+        <ul *ngFor="let warmdrink of warmdrinks | async" class="orange">
+          <li class="middleContent" routerLink="/addrecipe" >
+            <h4><strong>{{warmdrink.data.recipe}}
+              <span class="edit">
             <a routerLink="/addrecipe"(click)="deleteWarmDrink(warmdrink.id)"><i class="fa fa-trash"></i></a>
             <a (click)="getWarmDrink(warmdrink.id)"><i class="fa fa-pencil" ></i></a></span></strong></h4>
-        <!--<p>Ingredients: {{warmdrink.data.ingredients}}</p>-->
-        <!--<p>Preparation: {{warmdrink.data.preparation}}</p>-->
-        <!--<p>Image: {{warmdrink.data.recipe_image}}<br></p>-->
-      </li>
-    </ul>
-  </div>
-  </div>
+          </li>
+        </ul>
+      </div>
+    </div>
 </div>

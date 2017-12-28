@@ -11,26 +11,6 @@ body {
   padding: 2em;
 }
 
-input, textarea {
-  display:block;
-  width: 100%;
-  margin-bottom:15px;
-  padding:10px;
-  background:none;
-  border-bottom: 1px solid #414a59 !important;
-  border:0;
-  color:#fff;
-}
-
-input[type='submit'] {
-  background-color:#ffa500;
-  cursor:pointer;
-  color:#000;
-  font-weight:bold;
-  margin-bottom:50px;
-  padding:20px;
-}
-
 ul {
   list-style-type:none;
   width:100%;
@@ -46,14 +26,28 @@ h1 {
 }
 .new-recipe-container {
   background: #ccc;
+  float: left;
+  width: 100%;
   color: #000;
   border-left: #000 solid 1px;
   border-radius: 0 5px 5px 0;
   input, textarea {
-    display: block;
+    display:block;
     width: 100%;
     margin-bottom:15px;
     padding:10px;
+    background:none;
+    border-bottom: 1px solid #414a59;
+    border:0;
+    color:#fff;
+  }
+  input[type='submit'] {
+    background-color:#ffa500;
+    cursor:pointer;
+    color:#000;
+    font-weight:bold;
+    margin-bottom:50px;
+    padding:20px;
   }
 }
 select option {
@@ -64,6 +58,7 @@ select {
 }
 .middle {
   height: 100%;
+  width: 100%;
   padding-bottom: 1em;
 }
 .middleContent {
@@ -74,11 +69,11 @@ select {
 }
 .categoryButtonCollection {
   width: 100%;
-  cursor:pointer;
+  float: left;
   font-weight:bold;
   text-align: center;
   button {
-    //width: 100%;
+    cursor:pointer;
     margin-top: 1em;
     border: solid 1px #cccccc;
     background: #ffa500;
@@ -87,6 +82,9 @@ select {
   }
   button:active {
     background-color: white;
+  }
+  button:focus {
+    color: white;
   }
   button:visited {
     color: white;
@@ -110,10 +108,13 @@ select {
 .new-recipe-container {
   width: 100%;
 }
-.left-container {
+.sub-container {
   width: 50%;
   float: left;
   padding: 1em;
+  #right {
+    padding-left: 1.2em;
+  }
 }
 label {
   width: 100%;
@@ -128,10 +129,12 @@ input, textarea {
   border-bottom: 1px solid #414a59 !important;
   color:#fff;
 }
-.right-container {
-  width: 50%;
-  margin-left: 50%;
-  padding: 1em;
+.inner-container {
+  p {
+    size: 8px;
+    color: #ff8800;
+  }
+
 }
 
 

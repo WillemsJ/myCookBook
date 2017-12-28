@@ -18,9 +18,15 @@ export class AddRecipeComponent implements OnInit {
   recipeForm: FormGroup;
 
   recipeCollection: AngularFirestoreCollection<Recipe>;
+  appetizers: any;
+  soups: any;
+  cakes: any;
   desserts: any;
   maindishes: any;
+  colddrinks: any;
   warmdrinks: any;
+  nacocktails: any;
+  cocktails: any;
 
   recipe: string;
   ingredients: string;
@@ -39,19 +45,16 @@ export class AddRecipeComponent implements OnInit {
   constructor( private event: EventBusService,
                private formbuilder: FormBuilder,
                private afs: AngularFirestore, private firestore: FirestoreService, private viewList: EventBusService) {
-    this.fire = event;
   }
 
   ngOnInit() {
     this.viewList.hide();
-    // this.callDessertData();
-    // this.callMainDishData();
-    // this.callWarmDrinkData();
     this.createForm();
-    this.fire = event;
   }
   callDessertData() {
-    this.recipeCollection = null;
+    this.maindishes = null;
+    this.warmdrinks = null;
+
     this.recipeCollection = this.firestore.findDessertCollection();
     this.desserts = this.recipeCollection.snapshotChanges()
       .map(actions => {
@@ -63,6 +66,9 @@ export class AddRecipeComponent implements OnInit {
       });
   }
   callMainDishData() {
+    this.desserts = null;
+    this.warmdrinks = null;
+
     this.recipeCollection = this.firestore.findMainDishCollection();
     this.maindishes = this.recipeCollection.snapshotChanges()
       .map(actions => {
@@ -74,6 +80,9 @@ export class AddRecipeComponent implements OnInit {
       });
   }
   callWarmDrinkData() {
+    this.desserts = null;
+    this.maindishes = null;
+
     this.recipeCollection = this.firestore.findWarmDrinkCollection();
     this.warmdrinks = this.recipeCollection.snapshotChanges()
       .map(actions => {
@@ -106,6 +115,7 @@ export class AddRecipeComponent implements OnInit {
     //   .then(() => {
     //     console.log('data updated');
     //   });
+
   }
 
   clearForm() {

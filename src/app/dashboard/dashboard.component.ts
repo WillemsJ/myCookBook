@@ -103,7 +103,7 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  chooseDish(recipeName){
+  chooseDish(recipeName) {
     this.dishEvent.emit(recipeName);
     // console.log('chooseDish: ' + this.dishEvent);
   }
